@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.Services;
 
@@ -31,6 +33,30 @@ namespace AdminServices
             bool success = result > 0;
             return success;
 
+        }
+
+        [WebMethod]
+        public DataTable GetProposal(string subid)
+        {
+            try
+            {
+               DataTable dt = new DataTable("Submissions");
+               SqlCommand cmd = new SqlCommand("SELECT * FROM Submissions WHERE submissionId = @subid", connection);
+               cmd.Parameters.AddWithValue("@subid", subid);
+               connection.Open();
+               SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+               adapter.Fill(dt);
+               return dt;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                    connection.Close();
+            }
         }
     }
 }

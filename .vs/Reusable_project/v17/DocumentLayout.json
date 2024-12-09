@@ -1,0 +1,69 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\reusableProject\\reusable_project\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|d:\\reusableproject\\reusable_project\\adminservices\\r_service.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|solutionrelative:adminservices\\r_service.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|D:\\reusableProject\\reusable_project\\adminservices\\u_services.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|solutionrelative:adminservices\\u_services.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|D:\\reusableProject\\reusable_project\\adminservices\\a_services.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|solutionrelative:adminservices\\a_services.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "R_Service.asmx.cs",
+              "DocumentMoniker": "D:\\reusableProject\\reusable_project\\AdminServices\\R_Service.asmx.cs",
+              "RelativeDocumentMoniker": "AdminServices\\R_Service.asmx.cs",
+              "ToolTip": "D:\\reusableProject\\reusable_project\\AdminServices\\R_Service.asmx.cs",
+              "RelativeToolTip": "AdminServices\\R_Service.asmx.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAuwCkAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T16:59:04.976Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "U_Services.asmx.cs",
+              "DocumentMoniker": "D:\\reusableProject\\reusable_project\\AdminServices\\U_Services.asmx.cs",
+              "RelativeDocumentMoniker": "AdminServices\\U_Services.asmx.cs",
+              "ToolTip": "D:\\reusableProject\\reusable_project\\AdminServices\\U_Services.asmx.cs",
+              "RelativeToolTip": "AdminServices\\U_Services.asmx.cs",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAmwBUAAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T16:58:18.378Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "A_Services.asmx.cs",
+              "DocumentMoniker": "D:\\reusableProject\\reusable_project\\AdminServices\\A_Services.asmx.cs",
+              "RelativeDocumentMoniker": "AdminServices\\A_Services.asmx.cs",
+              "ToolTip": "D:\\reusableProject\\reusable_project\\AdminServices\\A_Services.asmx.cs",
+              "RelativeToolTip": "AdminServices\\A_Services.asmx.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-09T16:58:15.906Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
