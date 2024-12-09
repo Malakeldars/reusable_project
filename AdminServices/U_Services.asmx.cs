@@ -99,6 +99,56 @@ namespace AdminServices
           }
         }
 
-      //comment 
+        public bool UpdateProposal(int submissionid, string proposal)
+        {
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand("UPDATE Submissions SET proposal = @proposal WHERE submissionId = @submissionid", connection);
+                cmd.Parameters.AddWithValue("@submissionid", submissionid);
+                cmd.Parameters.AddWithValue("@proposal", proposal);
+                connection.Open();
+                int result = cmd.ExecuteNonQuery();
+                bool success = result > 0;
+                return success;
+
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        public bool SubmitProposal(string proposal)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("INSERT INTO Submissions (proposal) VALUES @proposal ", connection);
+                cmd.Parameters.AddWithValue("@proposal", proposal);
+                connection.Open();
+                int result = cmd.ExecuteNonQuery();
+                bool success = result > 0;
+                return success;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+        }
+
     }
 }
