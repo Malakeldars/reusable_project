@@ -98,6 +98,7 @@ namespace AdminServices
                 if (connection.State == System.Data.ConnectionState.Open) { connection.Close(); }
           }
         }
+        [WebMethod]
 
         public bool UpdateProposal(int submissionid, string proposal)
         {
@@ -125,7 +126,7 @@ namespace AdminServices
                 }
             }
         }
-
+        [WebMethod]
         public bool SubmitProposal(string proposal)
         {
             try

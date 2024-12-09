@@ -7,11 +7,11 @@
       "RelativeMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|solutionrelative:adminservices\\r_service.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|d:\\reusableproject\\reusable_project\\adminservices\\u_services.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|D:\\reusableProject\\reusable_project\\adminservices\\u_services.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|solutionrelative:adminservices\\u_services.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|d:\\reusableproject\\reusable_project\\adminservices\\a_services.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|D:\\reusableProject\\reusable_project\\adminservices\\a_services.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|solutionrelative:adminservices\\a_services.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -22,8 +22,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -32,10 +36,14 @@
               "RelativeDocumentMoniker": "AdminServices\\R_Service.asmx.cs",
               "ToolTip": "D:\\reusableProject\\reusable_project\\AdminServices\\R_Service.asmx.cs",
               "RelativeToolTip": "AdminServices\\R_Service.asmx.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAuwCkAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAFYAAAAAAAAAAAAgwGEAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-09T16:59:04.976Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             },
             {
               "$type": "Document",
@@ -45,7 +53,7 @@
               "RelativeDocumentMoniker": "AdminServices\\U_Services.asmx.cs",
               "ToolTip": "D:\\reusableProject\\reusable_project\\AdminServices\\U_Services.asmx.cs",
               "RelativeToolTip": "AdminServices\\U_Services.asmx.cs",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAmwBUAAABLAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAuwBcAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-09T16:58:18.378Z",
               "EditorCaption": ""
@@ -60,8 +68,7 @@
               "RelativeToolTip": "AdminServices\\A_Services.asmx.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-09T16:58:15.906Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-09T16:58:15.906Z"
             }
           ]
         }
