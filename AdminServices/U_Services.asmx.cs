@@ -19,7 +19,11 @@ namespace AdminServices
     // [System.Web.Script.Services.ScriptService]
     public class U_Services : System.Web.Services.WebService
     {
+<<<<<<< HEAD
         private SqlConnection connection = new SqlConnection("Data Source=LAPTOP-77LHTH18\\SQLEXPRESS01;Initial Catalog=Reusable_project;Integrated Security=True;Encrypt=False");
+=======
+        //private SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=True;");
+>>>>>>> 430371f826cdb3d5727fe29d6d35e7bfd53c809a
 
         [WebMethod]
         public bool CreateAccount( string password,string fullname,string email) {

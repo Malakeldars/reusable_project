@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\malak eldars\\source\\repos\\Reusable_project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|c:\\users\\malak eldars\\source\\repos\\reusable_project\\adminservices\\a_services.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|solutionrelative:adminservices\\a_services.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|C:\\Users\\malak eldars\\source\\repos\\Reusable_project\\adminservices\\u_services.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|solutionrelative:adminservices\\u_services.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|C:\\Users\\malak eldars\\source\\repos\\Reusable_project\\adminservices\\r_service.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|solutionrelative:adminservices\\r_service.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|c:\\users\\malak eldars\\source\\repos\\reusable_project\\adminservices\\a_services.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|solutionrelative:adminservices\\a_services.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{55C26CF8-9E28-4BF6-A373-86C39C48000B}|Reusable_project(Form)\\Reusable_project(Form).csproj|C:\\Users\\malak eldars\\source\\repos\\Reusable_project\\reusable_project(form)\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -38,43 +38,43 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "R_Service.asmx.cs",
               "DocumentMoniker": "C:\\Users\\malak eldars\\source\\repos\\Reusable_project\\AdminServices\\R_Service.asmx.cs",
               "RelativeDocumentMoniker": "AdminServices\\R_Service.asmx.cs",
               "ToolTip": "C:\\Users\\malak eldars\\source\\repos\\Reusable_project\\AdminServices\\R_Service.asmx.cs",
               "RelativeToolTip": "AdminServices\\R_Service.asmx.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAADMAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-10T01:45:16.881Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "U_Services.asmx.cs",
               "DocumentMoniker": "C:\\Users\\malak eldars\\source\\repos\\Reusable_project\\AdminServices\\U_Services.asmx.cs",
               "RelativeDocumentMoniker": "AdminServices\\U_Services.asmx.cs",
               "ToolTip": "C:\\Users\\malak eldars\\source\\repos\\Reusable_project\\AdminServices\\U_Services.asmx.cs",
               "RelativeToolTip": "AdminServices\\U_Services.asmx.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAABcAAAATAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABcAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-09T23:27:54.262Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "A_Services.asmx.cs",
               "DocumentMoniker": "C:\\Users\\malak eldars\\source\\repos\\Reusable_project\\AdminServices\\A_Services.asmx.cs",
               "RelativeDocumentMoniker": "AdminServices\\A_Services.asmx.cs",
               "ToolTip": "C:\\Users\\malak eldars\\source\\repos\\Reusable_project\\AdminServices\\A_Services.asmx.cs",
               "RelativeToolTip": "AdminServices\\A_Services.asmx.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAABQAAACvAAAAAAAAAA==",
+              "ViewState": "AgIAABEAAAAAAAAAAAAxwBUAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-09T22:48:29.995Z",
               "EditorCaption": ""
@@ -88,8 +88,7 @@
               "ToolTip": "C:\\Users\\malak eldars\\source\\repos\\Reusable_project\\Reusable_project(Form)\\Admin.cs [Design]",
               "RelativeToolTip": "Reusable_project(Form)\\Admin.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-09T22:11:06.266Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2024-12-09T22:11:06.266Z"
             },
             {
               "$type": "Document",
@@ -100,8 +99,7 @@
               "ToolTip": "C:\\Users\\malak eldars\\source\\repos\\Reusable_project\\Reusable_project(Form)\\Login.cs [Design]",
               "RelativeToolTip": "Reusable_project(Form)\\Login.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-10T00:23:38.356Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2024-12-10T00:23:38.356Z"
             },
             {
               "$type": "Document",
@@ -113,8 +111,7 @@
               "RelativeToolTip": "Reusable_project(Form)\\Admin.cs",
               "ViewState": "AgIAAC4AAAAAAAAAAAAcwDQAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-09T22:14:01.711Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-09T22:14:01.711Z"
             },
             {
               "$type": "Document",
@@ -126,8 +123,7 @@
               "RelativeToolTip": "Reusable_project(Form)\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-09T22:59:00.42Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-09T22:59:00.42Z"
             }
           ]
         }
