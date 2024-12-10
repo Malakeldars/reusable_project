@@ -3,14 +3,15 @@
   "WorkspaceRootPath": "C:\\Users\\malak eldars\\source\\repos\\Reusable_project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/LAPTOP_77LHTH18_SQLEXPRESS01/Reusable_project/True/SqlTable/dbo.Themes.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|c:\\users\\malak eldars\\source\\repos\\reusable_project\\adminservices\\u_services.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|C:\\Users\\malak eldars\\source\\repos\\Reusable_project\\adminservices\\u_services.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|solutionrelative:adminservices\\u_services.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|C:\\Users\\malak eldars\\source\\repos\\Reusable_project\\adminservices\\a_services.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|C:\\Users\\malak eldars\\source\\repos\\Reusable_project\\adminservices\\r_service.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|solutionrelative:adminservices\\r_service.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|c:\\users\\malak eldars\\source\\repos\\reusable_project\\adminservices\\a_services.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{130C9F42-0AD2-4570-9AB2-405794C308AF}|AdminServices\\AdminServices.csproj|solutionrelative:adminservices\\a_services.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -37,27 +38,30 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "dbo.Themes [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/LAPTOP_77LHTH18_SQLEXPRESS01/Reusable_project/True/SqlTable/dbo.Themes.sql",
-              "ToolTip": "dbo.Themes [Data]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-12-10T01:37:13.275Z",
+              "DocumentIndex": 1,
+              "Title": "R_Service.asmx.cs",
+              "DocumentMoniker": "C:\\Users\\malak eldars\\source\\repos\\Reusable_project\\AdminServices\\R_Service.asmx.cs",
+              "RelativeDocumentMoniker": "AdminServices\\R_Service.asmx.cs",
+              "ToolTip": "C:\\Users\\malak eldars\\source\\repos\\Reusable_project\\AdminServices\\R_Service.asmx.cs",
+              "RelativeToolTip": "AdminServices\\R_Service.asmx.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-10T01:45:16.881Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "U_Services.asmx.cs",
               "DocumentMoniker": "C:\\Users\\malak eldars\\source\\repos\\Reusable_project\\AdminServices\\U_Services.asmx.cs",
               "RelativeDocumentMoniker": "AdminServices\\U_Services.asmx.cs",
               "ToolTip": "C:\\Users\\malak eldars\\source\\repos\\Reusable_project\\AdminServices\\U_Services.asmx.cs",
               "RelativeToolTip": "AdminServices\\U_Services.asmx.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABcAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-09T23:27:54.262Z",
               "EditorCaption": ""
@@ -70,7 +74,7 @@
               "RelativeDocumentMoniker": "AdminServices\\A_Services.asmx.cs",
               "ToolTip": "C:\\Users\\malak eldars\\source\\repos\\Reusable_project\\AdminServices\\A_Services.asmx.cs",
               "RelativeToolTip": "AdminServices\\A_Services.asmx.cs",
-              "ViewState": "AgIAADYAAAAAAAAAAAAYwDIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABEAAAAAAAAAAAAxwBUAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-09T22:48:29.995Z",
               "EditorCaption": ""
@@ -84,8 +88,7 @@
               "ToolTip": "C:\\Users\\malak eldars\\source\\repos\\Reusable_project\\Reusable_project(Form)\\Admin.cs [Design]",
               "RelativeToolTip": "Reusable_project(Form)\\Admin.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-09T22:11:06.266Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2024-12-09T22:11:06.266Z"
             },
             {
               "$type": "Document",
@@ -108,8 +111,7 @@
               "RelativeToolTip": "Reusable_project(Form)\\Admin.cs",
               "ViewState": "AgIAAC4AAAAAAAAAAAAcwDQAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-09T22:14:01.711Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-09T22:14:01.711Z"
             },
             {
               "$type": "Document",
