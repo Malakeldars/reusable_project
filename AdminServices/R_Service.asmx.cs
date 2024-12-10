@@ -19,7 +19,7 @@ namespace AdminServices
     // [System.Web.Script.Services.ScriptService]
     public class R_Service : System.Web.Services.WebService
     {
-        private SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project;Integrated Security=True;");
+        private SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=True;");
 
         [WebMethod]
         public bool CreateAccount(string username, string password, string email)
@@ -87,18 +87,20 @@ namespace AdminServices
 
         [WebMethod]
 
-        public bool CreateProposalReviewEmail(int submissionid, string comment, string status, bool requestmod)
+        public bool CreateProposalReviewEmail(int submissionid, string comment, string status)
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO Notifications (ProjectID, ModificationComments, NotificationStatus, RequestModification) VALUES (@submissionid, @comment, @status, @requestmod)", connection);
+                SqlCommand cmd = new SqlCommand("INSERT INTO Notifications (ProjectID, ModificationComments, NotificationStatus) VALUES (@submissionid, @comment, @status)", connection);
+                SqlCommand cmd1 = new SqlCommand("INSERT INTO Submissions (status) VALUES (@status) WHERE submissionId = @submissionid", connection);
                 cmd.Parameters.AddWithValue("@submissionid", submissionid);
                 cmd.Parameters.AddWithValue("@comment", comment);
                 cmd.Parameters.AddWithValue("@status", status);
-                cmd.Parameters.AddWithValue("@requestmod", requestmod);
+                cmd1.Parameters.AddWithValue("@status", status);
                 connection.Open();
                 int result = cmd.ExecuteNonQuery();
-                bool isSuccess = result > 0;
+                int result1 = cmd1.ExecuteNonQuery();
+                bool isSuccess = (result > 0 && result1 > 0);
                 return isSuccess;
             }
             catch

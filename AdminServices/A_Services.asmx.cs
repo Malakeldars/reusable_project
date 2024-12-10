@@ -18,7 +18,7 @@ namespace AdminServices
     public class A_Services : System.Web.Services.WebService
     {
 
-        private SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project;Integrated Security=True;");
+        private SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=True;");
         [WebMethod]
         public bool Create_theme(String Name, String Duration, DateTime Deadline, float Budget)
         {
