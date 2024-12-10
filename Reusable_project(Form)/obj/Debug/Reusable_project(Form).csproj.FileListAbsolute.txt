@@ -1,0 +1,11 @@
+C:\Users\malak eldars\source\repos\Reusable_project\Reusable_project(Form)\bin\Debug\Reusable_project(Form).exe.config
+C:\Users\malak eldars\source\repos\Reusable_project\Reusable_project(Form)\bin\Debug\Reusable_project(Form).exe
+C:\Users\malak eldars\source\repos\Reusable_project\Reusable_project(Form)\bin\Debug\Reusable_project(Form).pdb
+C:\Users\malak eldars\source\repos\Reusable_project\Reusable_project(Form)\obj\Debug\Reusable_project(Form).csproj.AssemblyReference.cache
+C:\Users\malak eldars\source\repos\Reusable_project\Reusable_project(Form)\obj\Debug\Reusable_project_Form_.Properties.Resources.resources
+C:\Users\malak eldars\source\repos\Reusable_project\Reusable_project(Form)\obj\Debug\Reusable_project(Form).csproj.GenerateResource.cache
+C:\Users\malak eldars\source\repos\Reusable_project\Reusable_project(Form)\obj\Debug\Reusable_project(Form).csproj.CoreCompileInputs.cache
+C:\Users\malak eldars\source\repos\Reusable_project\Reusable_project(Form)\obj\Debug\Reusable_project(Form).exe
+C:\Users\malak eldars\source\repos\Reusable_project\Reusable_project(Form)\obj\Debug\Reusable_project(Form).pdb
+C:\Users\malak eldars\source\repos\Reusable_project\Reusable_project(Form)\obj\Debug\Reusable_project_Form_.Login.resources
+C:\Users\malak eldars\source\repos\Reusable_project\Reusable_project(Form)\obj\Debug\Reusable_project_Form_.Admin.resources
