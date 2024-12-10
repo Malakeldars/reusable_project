@@ -19,7 +19,7 @@ namespace AdminServices
     // [System.Web.Script.Services.ScriptService]
     public class U_Services : System.Web.Services.WebService
     {
-        private SqlConnection connection = new SqlConnection("Data Source=LAPTOP-77LHTH18\\SQLEXPRESS01;Initial Catalog=Reusable_project;Integrated Security=True;");
+        private SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project;Integrated Security=True;");
 
         [WebMethod]
         public bool CreateAccount( string password,string fullname,string email) {
@@ -98,6 +98,7 @@ namespace AdminServices
                 if (connection.State == System.Data.ConnectionState.Open) { connection.Close(); }
           }
         }
+        [WebMethod]
 
         public bool UpdateProposal(int submissionid, string proposal)
         {
@@ -125,7 +126,7 @@ namespace AdminServices
                 }
             }
         }
-
+        [WebMethod]
         public bool SubmitProposal(string proposal)
         {
             try

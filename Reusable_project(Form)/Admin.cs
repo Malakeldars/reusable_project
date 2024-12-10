@@ -24,12 +24,12 @@ namespace Reusable_project_Form_
           
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Login form = new Login();  
-            form.ShowDialog();
-            this.Hide();
-        }
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    Login form = new Login();  
+        //    form.ShowDialog();
+        //    this.Hide();
+        //}
 
         private void Admin_Load(object sender, EventArgs e)
         {
@@ -95,8 +95,8 @@ namespace Reusable_project_Form_
                 catch
                 {
                 MessageBox.Show("Please Make Sure That You Have Filled All The Required Filleds");
+                }
             }
-        }
            
         }
 
@@ -124,7 +124,7 @@ namespace Reusable_project_Form_
                         dateTimePicker1.Value = (DateTime)reader["deadline"];
                         textBox4.Text = reader["Budget"].ToString();
 
-                        // ... (populate TextBoxes as before)
+                     
                     }
                     else
                     {
