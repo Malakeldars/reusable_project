@@ -66,7 +66,7 @@ namespace Reusable_project_Form_
                     //Referee.Show();
                 }
 
-                // Optionally hide the current login form
+
                 this.Hide();
             }
             else
@@ -89,7 +89,7 @@ namespace Reusable_project_Form_
                 Connection.Open();
 
                 // Check for Admin
-                SqlCommand admincmd = new SqlCommand("SELECT AdminId FROM Admin WHERE Email = @Email AND Password = @Password", Connection);
+                SqlCommand admincmd = new SqlCommand("SELECT adminId FROM Admin WHERE email = @email AND password = @password", Connection);
                 admincmd.Parameters.AddWithValue("@Email", email);
                 admincmd.Parameters.AddWithValue("@Password", password);
 
@@ -102,7 +102,7 @@ namespace Reusable_project_Form_
                 }
 
                 // Check for User
-                SqlCommand usercmd = new SqlCommand("SELECT UserId FROM Users WHERE Email = @Email AND Password = @Password", Connection);
+                SqlCommand usercmd = new SqlCommand("SELECT userId FROM Users WHERE email = @email AND password = @password", Connection);
                 usercmd.Parameters.AddWithValue("@Email", email);
                 usercmd.Parameters.AddWithValue("@Password", password);
 
