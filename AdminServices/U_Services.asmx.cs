@@ -27,7 +27,7 @@ namespace AdminServices
 
             try
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO Users (password,email,fullname) VALUES (@password,@fullname,@email)", connection);
+                SqlCommand cmd = new SqlCommand("INSERT INTO Users (password,email,fullname) VALUES (@password,@email,@fullname)", connection);
                 cmd.Parameters.AddWithValue("@password", password);
                 cmd.Parameters.AddWithValue("@fullname", fullname);
                 cmd.Parameters.AddWithValue("@email", email);
