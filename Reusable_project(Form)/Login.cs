@@ -16,7 +16,7 @@ namespace Reusable_project_Form_
     {
 
 
-        private SqlConnection Connection = new SqlConnection("Data Source =.\\sqlexpress; Initial Catalog = reusable_proJectDB; Integrated Security = True; Encrypt=False");
+        private SqlConnection Connection = new SqlConnection("Data Source=DESKTOP-2OD02U8\\SQLEXPRESS;Initial Catalog=Reuse_db;Persist Security Info=True;User ID=sa;Password=DC@122180");
 
         public Login()
         {
@@ -66,7 +66,7 @@ namespace Reusable_project_Form_
                     //Referee.Show();
                 }
 
-                // Optionally hide the current login form
+
                 this.Hide();
             }
             else
@@ -89,8 +89,8 @@ namespace Reusable_project_Form_
                 Connection.Open();
 
                 // Check for Admin
-                SqlCommand admincmd = new SqlCommand("SELECT AdminId FROM Admin WHERE email = @email AND Password = @Password", Connection);
-                admincmd.Parameters.AddWithValue("@email", email);
+                SqlCommand admincmd = new SqlCommand("SELECT adminId FROM Admin WHERE email = @email AND password = @password", Connection);
+                admincmd.Parameters.AddWithValue("@Email", email);
                 admincmd.Parameters.AddWithValue("@Password", password);
 
                 var adminresult = admincmd.ExecuteScalar();
@@ -102,7 +102,7 @@ namespace Reusable_project_Form_
                 }
 
                 // Check for User
-                SqlCommand usercmd = new SqlCommand("SELECT UserId FROM Users WHERE Email = @Email AND Password = @Password", Connection);
+                SqlCommand usercmd = new SqlCommand("SELECT userId FROM Users WHERE email = @email AND password = @password", Connection);
                 usercmd.Parameters.AddWithValue("@Email", email);
                 usercmd.Parameters.AddWithValue("@Password", password);
 
@@ -145,7 +145,7 @@ namespace Reusable_project_Form_
 
             // If no match found, return null
             return role;
-        } 
+        }
 
 
 
