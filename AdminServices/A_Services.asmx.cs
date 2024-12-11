@@ -18,7 +18,9 @@ namespace AdminServices
     public class A_Services : System.Web.Services.WebService
     {
 
-        private SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=True;");
+
+         SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=False");
+
         [WebMethod]
         public bool Create_theme(String Name, String Duration, DateTime Deadline, float Budget)
         {
@@ -34,7 +36,7 @@ namespace AdminServices
 
                 bool success = result > 0;
                 return success;
-            }
+        }
             catch
             {
                 return false;
@@ -45,7 +47,7 @@ namespace AdminServices
                 {
                     connection.Close();
                 }
-            }
+}
 
         }
 
