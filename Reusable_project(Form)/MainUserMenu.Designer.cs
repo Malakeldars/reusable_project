@@ -39,9 +39,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(32, 40);
+            this.label1.Location = new System.Drawing.Point(36, 50);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(210, 37);
+            this.label1.Size = new System.Drawing.Size(252, 44);
             this.label1.TabIndex = 0;
             this.label1.Text = "Welcome 3amo";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -50,9 +50,10 @@
             // 
             this.SubmitPropButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.SubmitPropButton.Font = new System.Drawing.Font("Calibri Light", 10F);
-            this.SubmitPropButton.Location = new System.Drawing.Point(39, 111);
+            this.SubmitPropButton.Location = new System.Drawing.Point(44, 139);
+            this.SubmitPropButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.SubmitPropButton.Name = "SubmitPropButton";
-            this.SubmitPropButton.Size = new System.Drawing.Size(203, 33);
+            this.SubmitPropButton.Size = new System.Drawing.Size(228, 41);
             this.SubmitPropButton.TabIndex = 1;
             this.SubmitPropButton.Text = "Submit a proposal";
             this.SubmitPropButton.UseVisualStyleBackColor = false;
@@ -62,9 +63,10 @@
             // 
             this.SubmitRepButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.SubmitRepButton.Font = new System.Drawing.Font("Calibri Light", 10F);
-            this.SubmitRepButton.Location = new System.Drawing.Point(39, 163);
+            this.SubmitRepButton.Location = new System.Drawing.Point(44, 204);
+            this.SubmitRepButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.SubmitRepButton.Name = "SubmitRepButton";
-            this.SubmitRepButton.Size = new System.Drawing.Size(203, 33);
+            this.SubmitRepButton.Size = new System.Drawing.Size(228, 41);
             this.SubmitRepButton.TabIndex = 2;
             this.SubmitRepButton.Text = "Submit a report";
             this.SubmitRepButton.UseVisualStyleBackColor = false;
@@ -74,9 +76,10 @@
             // 
             this.DeletePropButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.DeletePropButton.Font = new System.Drawing.Font("Calibri Light", 10F);
-            this.DeletePropButton.Location = new System.Drawing.Point(39, 218);
+            this.DeletePropButton.Location = new System.Drawing.Point(44, 272);
+            this.DeletePropButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DeletePropButton.Name = "DeletePropButton";
-            this.DeletePropButton.Size = new System.Drawing.Size(203, 33);
+            this.DeletePropButton.Size = new System.Drawing.Size(228, 41);
             this.DeletePropButton.TabIndex = 3;
             this.DeletePropButton.Text = "Delete a proposal";
             this.DeletePropButton.UseVisualStyleBackColor = false;
@@ -86,9 +89,10 @@
             // 
             this.UpdatePropButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.UpdatePropButton.Font = new System.Drawing.Font("Calibri Light", 10F);
-            this.UpdatePropButton.Location = new System.Drawing.Point(39, 270);
+            this.UpdatePropButton.Location = new System.Drawing.Point(44, 338);
+            this.UpdatePropButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.UpdatePropButton.Name = "UpdatePropButton";
-            this.UpdatePropButton.Size = new System.Drawing.Size(203, 33);
+            this.UpdatePropButton.Size = new System.Drawing.Size(228, 41);
             this.UpdatePropButton.TabIndex = 4;
             this.UpdatePropButton.Text = "Update a proposal";
             this.UpdatePropButton.UseVisualStyleBackColor = false;
@@ -96,16 +100,18 @@
             // 
             // MainUserMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(900, 562);
             this.Controls.Add(this.UpdatePropButton);
             this.Controls.Add(this.DeletePropButton);
             this.Controls.Add(this.SubmitRepButton);
             this.Controls.Add(this.SubmitPropButton);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainUserMenu";
             this.Text = "MainUserMenu";
+            this.Load += new System.EventHandler(this.MainUserMenu_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

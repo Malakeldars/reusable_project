@@ -12,9 +12,15 @@ namespace Reusable_project_Form_
 {
     public partial class MainUserMenu : Form
     {
-        public MainUserMenu()
+
+        private int _userId;
+
+        public MainUserMenu(int userId)
         {
             InitializeComponent();
+            _userId = userId;
+            InitializeComponent();
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -42,6 +48,11 @@ namespace Reusable_project_Form_
         }
 
         private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MainUserMenu_Load(object sender, EventArgs e)
         {
 
         }

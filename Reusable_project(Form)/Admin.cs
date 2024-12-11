@@ -13,10 +13,18 @@ namespace Reusable_project_Form_
 {
     public partial class Admin : Form
     {
-        SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=False");
-        public Admin()
+
+        private int _adminId;
+
+
+        SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False");
+        public Admin(int adminId)
         {
             InitializeComponent();
+            _adminId = adminId;
+            InitializeComponent();
+
+
         }
 
         private void label1_Click(object sender, EventArgs e)
