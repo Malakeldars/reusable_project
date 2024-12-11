@@ -10,3 +10,5 @@ D:\reusableProject\reusable_project\Reusable_project(Form)\obj\Debug\Reusable_pr
 D:\reusableProject\reusable_project\Reusable_project(Form)\obj\Debug\Reusable_project_Form_.Login.resources
 D:\reusableProject\reusable_project\Reusable_project(Form)\obj\Debug\Reusable_project_Form_.Admin.resources
 D:\reusableProject\reusable_project\Reusable_project(Form)\obj\Debug\Reusable_project_Form_.SubmitProposal.resources
+D:\reusableProject\reusable_project\Reusable_project(Form)\obj\Debug\Reusable_project_Form_.MainUserMenu.resources
+D:\reusableProject\reusable_project\Reusable_project(Form)\obj\Debug\Reusable_project_Form_.SubmitReport1.resources

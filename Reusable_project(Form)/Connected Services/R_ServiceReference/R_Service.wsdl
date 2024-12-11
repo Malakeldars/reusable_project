@@ -18,6 +18,64 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetProposal">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="subid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProposalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProposalResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="reportid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetReportResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateProposalReviewEmail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="submissionid" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="comment" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="status" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateProposalReviewEmailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateProposalReviewEmailResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="CreateAccountSoapIn">
@@ -26,10 +84,40 @@
   <wsdl:message name="CreateAccountSoapOut">
     <wsdl:part name="parameters" element="tns:CreateAccountResponse" />
   </wsdl:message>
+  <wsdl:message name="GetProposalSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProposal" />
+  </wsdl:message>
+  <wsdl:message name="GetProposalSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProposalResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetReportSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReport" />
+  </wsdl:message>
+  <wsdl:message name="GetReportSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateProposalReviewEmailSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateProposalReviewEmail" />
+  </wsdl:message>
+  <wsdl:message name="CreateProposalReviewEmailSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateProposalReviewEmailResponse" />
+  </wsdl:message>
   <wsdl:portType name="R_ServiceSoap">
     <wsdl:operation name="CreateAccount">
       <wsdl:input message="tns:CreateAccountSoapIn" />
       <wsdl:output message="tns:CreateAccountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProposal">
+      <wsdl:input message="tns:GetProposalSoapIn" />
+      <wsdl:output message="tns:GetProposalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReport">
+      <wsdl:input message="tns:GetReportSoapIn" />
+      <wsdl:output message="tns:GetReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateProposalReviewEmail">
+      <wsdl:input message="tns:CreateProposalReviewEmailSoapIn" />
+      <wsdl:output message="tns:CreateProposalReviewEmailSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="R_ServiceSoap" type="tns:R_ServiceSoap">
@@ -43,11 +131,65 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetProposal">
+      <soap:operation soapAction="http://tempuri.org/GetProposal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReport">
+      <soap:operation soapAction="http://tempuri.org/GetReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateProposalReviewEmail">
+      <soap:operation soapAction="http://tempuri.org/CreateProposalReviewEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="R_ServiceSoap12" type="tns:R_ServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="CreateAccount">
       <soap12:operation soapAction="http://tempuri.org/CreateAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProposal">
+      <soap12:operation soapAction="http://tempuri.org/GetProposal" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReport">
+      <soap12:operation soapAction="http://tempuri.org/GetReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateProposalReviewEmail">
+      <soap12:operation soapAction="http://tempuri.org/CreateProposalReviewEmail" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

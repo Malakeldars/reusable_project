@@ -66,7 +66,32 @@ namespace Reusable_project_Form_
                     string proposalText = ProposalTextbox.Text;
                     int themeId = selectedTheme.ThemeId;
                     UserServiceReference.U_ServicesSoapClient s = new UserServiceReference.U_ServicesSoapClient();
-                    s.SubmitProposal(1, themeId, proposalText);
+                    bool submissionSuccess = s.SubmitProposal(1, themeId, proposalText);
+
+                    if (submissionSuccess)
+                    {
+                        using (SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=False"))
+                        {
+                            string query = "SELECT MAX(submissionId) AS submissionId FROM Submissions WHERE themeId = @themeId";
+                            SqlCommand cmd = new SqlCommand(query, connection);
+                            cmd.Parameters.AddWithValue("@themeId", themeId);
+                            connection.Open();
+                            SqlDataReader reader = cmd.ExecuteReader();
+                            if (reader.Read())
+                            {
+                                int submissionId = (int)reader["submissionId"];
+                                MessageBox.Show("Your submission ID is: " + submissionId.ToString());
+                            }
+                            else
+                            {
+                                MessageBox.Show("Submission ID not found in the database.");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Submission failed.");
+                    }
                 }
                 else
                 {
@@ -77,6 +102,13 @@ namespace Reusable_project_Form_
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            SubmitProposal submitProposal = new SubmitProposal();
+            submitProposal.Show();
+            this.Hide();
         }
     }
 }

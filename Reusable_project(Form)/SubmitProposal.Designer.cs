@@ -34,6 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.SubmitButton = new System.Windows.Forms.Button();
+            this.CancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ThemesCombobox
@@ -89,7 +90,7 @@
             // 
             this.SubmitButton.BackColor = System.Drawing.SystemColors.ControlLight;
             this.SubmitButton.Font = new System.Drawing.Font("Calibri Light", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SubmitButton.Location = new System.Drawing.Point(21, 367);
+            this.SubmitButton.Location = new System.Drawing.Point(22, 372);
             this.SubmitButton.Name = "SubmitButton";
             this.SubmitButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.SubmitButton.Size = new System.Drawing.Size(94, 29);
@@ -98,12 +99,26 @@
             this.SubmitButton.UseVisualStyleBackColor = false;
             this.SubmitButton.Click += new System.EventHandler(this.button1_Click);
             // 
+            // CancelButton
+            // 
+            this.CancelButton.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.CancelButton.Font = new System.Drawing.Font("Calibri Light", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CancelButton.Location = new System.Drawing.Point(143, 372);
+            this.CancelButton.Name = "CancelButton";
+            this.CancelButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.CancelButton.Size = new System.Drawing.Size(94, 29);
+            this.CancelButton.TabIndex = 6;
+            this.CancelButton.Text = "Cancel";
+            this.CancelButton.UseVisualStyleBackColor = false;
+            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            // 
             // SubmitProposal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.SubmitButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -126,5 +141,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button SubmitButton;
+        private System.Windows.Forms.Button CancelButton;
     }
 }

@@ -9,94 +9,40 @@
 //------------------------------------------------------------------------------
 
 namespace Reusable_project_Form_.R_ServiceReference {
+    using System.Data;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="R_ServiceReference.R_ServiceSoap")]
     public interface R_ServiceSoap {
         
-        // CODEGEN: Generating message contract since element name username from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CreateAccount", ReplyAction="*")]
-        Reusable_project_Form_.R_ServiceReference.CreateAccountResponse CreateAccount(Reusable_project_Form_.R_ServiceReference.CreateAccountRequest request);
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool CreateAccount(string username, string password, string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CreateAccount", ReplyAction="*")]
-        System.Threading.Tasks.Task<Reusable_project_Form_.R_ServiceReference.CreateAccountResponse> CreateAccountAsync(Reusable_project_Form_.R_ServiceReference.CreateAccountRequest request);
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class CreateAccountRequest {
+        System.Threading.Tasks.Task<bool> CreateAccountAsync(string username, string password, string email);
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="CreateAccount", Namespace="http://tempuri.org/", Order=0)]
-        public Reusable_project_Form_.R_ServiceReference.CreateAccountRequestBody Body;
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetProposal", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataTable GetProposal(int subid);
         
-        public CreateAccountRequest() {
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetProposal", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataTable> GetProposalAsync(int subid);
         
-        public CreateAccountRequest(Reusable_project_Form_.R_ServiceReference.CreateAccountRequestBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class CreateAccountRequestBody {
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetReport", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Data.DataTable GetReport(int reportid);
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string username;
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetReport", ReplyAction="*")]
+        System.Threading.Tasks.Task<System.Data.DataTable> GetReportAsync(int reportid);
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string password;
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CreateProposalReviewEmail", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool CreateProposalReviewEmail(int submissionid, string comment, string status);
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public string email;
-        
-        public CreateAccountRequestBody() {
-        }
-        
-        public CreateAccountRequestBody(string username, string password, string email) {
-            this.username = username;
-            this.password = password;
-            this.email = email;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class CreateAccountResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="CreateAccountResponse", Namespace="http://tempuri.org/", Order=0)]
-        public Reusable_project_Form_.R_ServiceReference.CreateAccountResponseBody Body;
-        
-        public CreateAccountResponse() {
-        }
-        
-        public CreateAccountResponse(Reusable_project_Form_.R_ServiceReference.CreateAccountResponseBody Body) {
-            this.Body = Body;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class CreateAccountResponseBody {
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
-        public bool CreateAccountResult;
-        
-        public CreateAccountResponseBody() {
-        }
-        
-        public CreateAccountResponseBody(bool CreateAccountResult) {
-            this.CreateAccountResult = CreateAccountResult;
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/CreateProposalReviewEmail", ReplyAction="*")]
+        System.Threading.Tasks.Task<bool> CreateProposalReviewEmailAsync(int submissionid, string comment, string status);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -126,33 +72,36 @@ namespace Reusable_project_Form_.R_ServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Reusable_project_Form_.R_ServiceReference.CreateAccountResponse Reusable_project_Form_.R_ServiceReference.R_ServiceSoap.CreateAccount(Reusable_project_Form_.R_ServiceReference.CreateAccountRequest request) {
-            return base.Channel.CreateAccount(request);
-        }
-        
         public bool CreateAccount(string username, string password, string email) {
-            Reusable_project_Form_.R_ServiceReference.CreateAccountRequest inValue = new Reusable_project_Form_.R_ServiceReference.CreateAccountRequest();
-            inValue.Body = new Reusable_project_Form_.R_ServiceReference.CreateAccountRequestBody();
-            inValue.Body.username = username;
-            inValue.Body.password = password;
-            inValue.Body.email = email;
-            Reusable_project_Form_.R_ServiceReference.CreateAccountResponse retVal = ((Reusable_project_Form_.R_ServiceReference.R_ServiceSoap)(this)).CreateAccount(inValue);
-            return retVal.Body.CreateAccountResult;
+            return base.Channel.CreateAccount(username, password, email);
         }
         
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<Reusable_project_Form_.R_ServiceReference.CreateAccountResponse> Reusable_project_Form_.R_ServiceReference.R_ServiceSoap.CreateAccountAsync(Reusable_project_Form_.R_ServiceReference.CreateAccountRequest request) {
-            return base.Channel.CreateAccountAsync(request);
+        public System.Threading.Tasks.Task<bool> CreateAccountAsync(string username, string password, string email) {
+            return base.Channel.CreateAccountAsync(username, password, email);
         }
         
-        public System.Threading.Tasks.Task<Reusable_project_Form_.R_ServiceReference.CreateAccountResponse> CreateAccountAsync(string username, string password, string email) {
-            Reusable_project_Form_.R_ServiceReference.CreateAccountRequest inValue = new Reusable_project_Form_.R_ServiceReference.CreateAccountRequest();
-            inValue.Body = new Reusable_project_Form_.R_ServiceReference.CreateAccountRequestBody();
-            inValue.Body.username = username;
-            inValue.Body.password = password;
-            inValue.Body.email = email;
-            return ((Reusable_project_Form_.R_ServiceReference.R_ServiceSoap)(this)).CreateAccountAsync(inValue);
+        public System.Data.DataTable GetProposal(int subid) {
+            return base.Channel.GetProposal(subid);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataTable> GetProposalAsync(int subid) {
+            return base.Channel.GetProposalAsync(subid);
+        }
+        
+        public System.Data.DataTable GetReport(int reportid) {
+            return base.Channel.GetReport(reportid);
+        }
+        
+        public System.Threading.Tasks.Task<System.Data.DataTable> GetReportAsync(int reportid) {
+            return base.Channel.GetReportAsync(reportid);
+        }
+        
+        public bool CreateProposalReviewEmail(int submissionid, string comment, string status) {
+            return base.Channel.CreateProposalReviewEmail(submissionid, comment, status);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CreateProposalReviewEmailAsync(int submissionid, string comment, string status) {
+            return base.Channel.CreateProposalReviewEmailAsync(submissionid, comment, status);
         }
     }
 }

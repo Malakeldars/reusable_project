@@ -154,5 +154,31 @@ namespace AdminServices
             }
         }
 
+        [WebMethod]
+        public bool SubmitReport(int submissionid,string report)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("INSERT INTO Reports (SubmissionID,reportcontent) VALUES (@submissionid, @report) ", connection);
+                cmd.Parameters.AddWithValue("@submissionid", submissionid);
+                cmd.Parameters.AddWithValue("@report", report);
+                connection.Open();
+                int result = cmd.ExecuteNonQuery();
+                bool success = result > 0;
+                return success;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+        }
+
     }
 }

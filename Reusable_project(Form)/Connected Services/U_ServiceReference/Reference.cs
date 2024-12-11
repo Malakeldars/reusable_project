@@ -36,6 +36,27 @@ namespace Reusable_project_Form_.U_ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/DeleteProposal", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> DeleteProposalAsync(int submissionid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProposal", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool UpdateProposal(int submissionid, string proposal);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/UpdateProposal", ReplyAction="*")]
+        System.Threading.Tasks.Task<bool> UpdateProposalAsync(int submissionid, string proposal);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SubmitProposal", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool SubmitProposal(int userid, int themeid, string proposal);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SubmitProposal", ReplyAction="*")]
+        System.Threading.Tasks.Task<bool> SubmitProposalAsync(int userid, int themeid, string proposal);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SubmitReport", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool SubmitReport(int submissionid, string report);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SubmitReport", ReplyAction="*")]
+        System.Threading.Tasks.Task<bool> SubmitReportAsync(int submissionid, string report);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -87,6 +108,30 @@ namespace Reusable_project_Form_.U_ServiceReference {
         
         public System.Threading.Tasks.Task<bool> DeleteProposalAsync(int submissionid) {
             return base.Channel.DeleteProposalAsync(submissionid);
+        }
+        
+        public bool UpdateProposal(int submissionid, string proposal) {
+            return base.Channel.UpdateProposal(submissionid, proposal);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateProposalAsync(int submissionid, string proposal) {
+            return base.Channel.UpdateProposalAsync(submissionid, proposal);
+        }
+        
+        public bool SubmitProposal(int userid, int themeid, string proposal) {
+            return base.Channel.SubmitProposal(userid, themeid, proposal);
+        }
+        
+        public System.Threading.Tasks.Task<bool> SubmitProposalAsync(int userid, int themeid, string proposal) {
+            return base.Channel.SubmitProposalAsync(userid, themeid, proposal);
+        }
+        
+        public bool SubmitReport(int submissionid, string report) {
+            return base.Channel.SubmitReport(submissionid, report);
+        }
+        
+        public System.Threading.Tasks.Task<bool> SubmitReportAsync(int submissionid, string report) {
+            return base.Channel.SubmitReportAsync(submissionid, report);
         }
     }
 }

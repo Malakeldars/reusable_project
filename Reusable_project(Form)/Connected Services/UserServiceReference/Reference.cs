@@ -50,6 +50,13 @@ namespace Reusable_project_Form_.UserServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SubmitProposal", ReplyAction="*")]
         System.Threading.Tasks.Task<bool> SubmitProposalAsync(int userid, int themeid, string proposal);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SubmitReport", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        bool SubmitReport(int submissionid, string report);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SubmitReport", ReplyAction="*")]
+        System.Threading.Tasks.Task<bool> SubmitReportAsync(int submissionid, string report);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -117,6 +124,14 @@ namespace Reusable_project_Form_.UserServiceReference {
         
         public System.Threading.Tasks.Task<bool> SubmitProposalAsync(int userid, int themeid, string proposal) {
             return base.Channel.SubmitProposalAsync(userid, themeid, proposal);
+        }
+        
+        public bool SubmitReport(int submissionid, string report) {
+            return base.Channel.SubmitReport(submissionid, report);
+        }
+        
+        public System.Threading.Tasks.Task<bool> SubmitReportAsync(int submissionid, string report) {
+            return base.Channel.SubmitReportAsync(submissionid, report);
         }
     }
 }

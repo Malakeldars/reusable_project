@@ -52,19 +52,16 @@ namespace Reusable_project_Form_
         }
 
         private void button2_Click_1(object sender, EventArgs e)
-        {
-         
+        { 
                 Admin Admin = new Admin();
                 Admin.Show();
                 this.Hide();
-           
-           
         }
 
         private void UserPageButton_Click(object sender, EventArgs e)
         {
-            SubmitProposal submitProposal = new SubmitProposal();
-            submitProposal.Show();
+            MainUserMenu mainUserMenu = new MainUserMenu();
+            mainUserMenu.Show();
             this.Hide();
 
         }
