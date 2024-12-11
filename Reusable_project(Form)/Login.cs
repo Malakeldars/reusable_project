@@ -16,7 +16,7 @@ namespace Reusable_project_Form_
     {
 
 
-        private SqlConnection Connection = new SqlConnection("Data Source =.\\sqlexpress; Initial Catalog = reusable_proJectDB; Integrated Security = True; Encrypt=False");
+        SqlConnection Connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=False");
 
         public Login()
         {
@@ -173,6 +173,11 @@ namespace Reusable_project_Form_
         private void ShowPasswordCheck_CheckedChanged_1(object sender, EventArgs e)
         {
             PasswordTextbox.UseSystemPasswordChar = !PasswordTextbox.UseSystemPasswordChar;
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
 
         }
     }

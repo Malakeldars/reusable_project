@@ -19,7 +19,7 @@ namespace AdminServices
     // [System.Web.Script.Services.ScriptService]
     public class U_Services : System.Web.Services.WebService
     {
-         SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False");
+        SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=False");
 
 
         [WebMethod]
