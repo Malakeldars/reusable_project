@@ -89,8 +89,8 @@ namespace Reusable_project_Form_
                 Connection.Open();
 
                 // Check for Admin
-                SqlCommand admincmd = new SqlCommand("SELECT AdminId FROM Admin WHERE Email = @Email AND Password = @Password", Connection);
-                admincmd.Parameters.AddWithValue("@Email", email);
+                SqlCommand admincmd = new SqlCommand("SELECT AdminId FROM Admin WHERE email = @email AND Password = @Password", Connection);
+                admincmd.Parameters.AddWithValue("@email", email);
                 admincmd.Parameters.AddWithValue("@Password", password);
 
                 var adminresult = admincmd.ExecuteScalar();
@@ -145,7 +145,7 @@ namespace Reusable_project_Form_
 
             // If no match found, return null
             return role;
-        }
+        } 
 
 
 
