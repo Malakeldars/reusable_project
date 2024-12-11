@@ -36,7 +36,7 @@ namespace Reusable_project_Form_
 
                     if (submissionSuccess)
                     {
-                        using (SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=False"))
+                        using (SqlConnection connection = new SqlConnection("Data Source=DESKTOP-2OD02U8\\SQLEXPRESS;Initial Catalog=Reuse_db;Persist Security Info=True;User ID=sa;Password=DC@122180"))
                         {
                             string query = "SELECT MAX(ReportId) AS ReportId FROM Reports WHERE SubmissionId = @submissionId";
                             SqlCommand cmd = new SqlCommand(query, connection);
