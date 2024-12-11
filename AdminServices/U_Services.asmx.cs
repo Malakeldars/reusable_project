@@ -128,12 +128,14 @@ namespace AdminServices
             }
         }
         [WebMethod]
-        public bool SubmitProposal(string proposal)
+        public bool SubmitProposal(int userid, int themeid,string proposal)
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO Submissions (proposal) VALUES @proposal ", connection);
+                SqlCommand cmd = new SqlCommand("INSERT INTO Submissions (userid,themeid,proposal) VALUES (@userid, @themeid, @proposal) ", connection);
                 cmd.Parameters.AddWithValue("@proposal", proposal);
+                cmd.Parameters.AddWithValue("@userid", userid);
+                cmd.Parameters.AddWithValue("@themeid", themeid);
                 connection.Open();
                 int result = cmd.ExecuteNonQuery();
                 bool success = result > 0;

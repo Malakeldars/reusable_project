@@ -2,9 +2,11 @@ D:\reusableProject\reusable_project\Reusable_project(Form)\bin\Debug\Reusable_pr
 D:\reusableProject\reusable_project\Reusable_project(Form)\bin\Debug\Reusable_project(Form).exe
 D:\reusableProject\reusable_project\Reusable_project(Form)\bin\Debug\Reusable_project(Form).pdb
 D:\reusableProject\reusable_project\Reusable_project(Form)\obj\Debug\Reusable_project(Form).csproj.AssemblyReference.cache
-D:\reusableProject\reusable_project\Reusable_project(Form)\obj\Debug\Reusable_project_Form_.Form1.resources
 D:\reusableProject\reusable_project\Reusable_project(Form)\obj\Debug\Reusable_project_Form_.Properties.Resources.resources
 D:\reusableProject\reusable_project\Reusable_project(Form)\obj\Debug\Reusable_project(Form).csproj.GenerateResource.cache
 D:\reusableProject\reusable_project\Reusable_project(Form)\obj\Debug\Reusable_project(Form).csproj.CoreCompileInputs.cache
 D:\reusableProject\reusable_project\Reusable_project(Form)\obj\Debug\Reusable_project(Form).exe
 D:\reusableProject\reusable_project\Reusable_project(Form)\obj\Debug\Reusable_project(Form).pdb
+D:\reusableProject\reusable_project\Reusable_project(Form)\obj\Debug\Reusable_project_Form_.Login.resources
+D:\reusableProject\reusable_project\Reusable_project(Form)\obj\Debug\Reusable_project_Form_.Admin.resources
+D:\reusableProject\reusable_project\Reusable_project(Form)\obj\Debug\Reusable_project_Form_.SubmitProposal.resources
