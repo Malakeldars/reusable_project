@@ -17,7 +17,7 @@ namespace Reusable_project_Form_
         private int _adminId;
 
 
-        private SqlConnection conn = new SqlConnection("Data Source=DESKTOP-2OD02U8\\SQLEXPRESS;Initial Catalog=Reuse_db;Persist Security Info=True;User ID=sa;Password=DC@122180"); 
+        private SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=False"); 
         public Admin(int adminId)
         {
             InitializeComponent();

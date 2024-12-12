@@ -31,13 +31,14 @@ namespace Reusable_project_Form_
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            try
+            //try
             {
                 if (IDTextbox != null)
                 {
-                    int submissionId = int.Parse(IDTextbox.Text);
+                    int submissionId = int.Parse(IDTextbox.Text.Trim());
+                    string reportTitle = TitleTextbox.Text;
                     U_ServiceReference.U_ServicesSoapClient s = new U_ServiceReference.U_ServicesSoapClient();
-                    bool submissionSuccess = s.SubmitReport(submissionId,ReportTextbox.Text);
+                    bool submissionSuccess = s.SubmitReport(submissionId,reportTitle,ReportTextbox.Text);
 
                     if (submissionSuccess)
                     {
@@ -69,10 +70,10 @@ namespace Reusable_project_Form_
                     MessageBox.Show("Please enter your project's submission ID");
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Error: " + ex.Message);
+            //}
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
@@ -83,6 +84,11 @@ namespace Reusable_project_Form_
         }
 
         private void SubmitReport1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
         {
 
         }

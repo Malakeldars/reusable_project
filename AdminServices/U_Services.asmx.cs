@@ -128,12 +128,13 @@ namespace AdminServices
             }
         }
         [WebMethod]
-        public bool SubmitProposal(int userid, int themeid,string proposal)
+        public bool SubmitProposal(int userid, int themeid, string title, string proposal)
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO Submissions (userid,themeid,proposal) VALUES (@userid, @themeid, @proposal) ", connection);
+                SqlCommand cmd = new SqlCommand("INSERT INTO Submissions (userid,themeid,title,proposal) VALUES (@userid, @themeid, @title, @proposal) ", connection);
                 cmd.Parameters.AddWithValue("@proposal", proposal);
+                cmd.Parameters.AddWithValue("@title", title);
                 cmd.Parameters.AddWithValue("@userid", userid);
                 cmd.Parameters.AddWithValue("@themeid", themeid);
                 connection.Open();
@@ -155,12 +156,13 @@ namespace AdminServices
         }
 
         [WebMethod]
-        public bool SubmitReport(int submissionid,string report)
+        public bool SubmitReport(int submissionid,string title,string report)
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO Reports (SubmissionID,reportcontent) VALUES (@submissionid, @report) ", connection);
+                SqlCommand cmd = new SqlCommand("INSERT INTO Reports (SubmissionID,title,reportcontent) VALUES (@submissionid, @title, @report) ", connection);
                 cmd.Parameters.AddWithValue("@submissionid", submissionid);
+                cmd.Parameters.AddWithValue("@title", title);
                 cmd.Parameters.AddWithValue("@report", report);
                 connection.Open();
                 int result = cmd.ExecuteNonQuery();
