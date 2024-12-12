@@ -22,9 +22,6 @@ namespace Reusable_project_Form_
         {
             InitializeComponent();
             _adminId = adminId;
-            InitializeComponent();
-
-
         }
 
         private void label1_Click(object sender, EventArgs e)

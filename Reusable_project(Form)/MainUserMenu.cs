@@ -17,7 +17,6 @@ namespace Reusable_project_Form_
 
         public MainUserMenu(int userId)
         {
-            InitializeComponent();
             _userId = userId;
             InitializeComponent();
 
