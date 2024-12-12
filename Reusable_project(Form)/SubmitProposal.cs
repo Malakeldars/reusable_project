@@ -13,11 +13,9 @@ namespace Reusable_project_Form_
 {
     public partial class SubmitProposal : Form
     {
-        int _userId;
-        public SubmitProposal(int userId)
+
+        public SubmitProposal()
         {
-            InitializeComponent();
-            _userId = userId;
             InitializeComponent();
         }
         public class Theme
@@ -44,8 +42,8 @@ namespace Reusable_project_Form_
                             Name = reader["name"].ToString()
                         });
                     }
-                    ThemesCombobox.ValueMember = "themeId";
-                    ThemesCombobox.DisplayMember = "name";
+                    ThemesCombobox.ValueMember = "ThemeId";
+                    ThemesCombobox.DisplayMember = "Name";
                 }
             }
             catch
@@ -68,13 +66,13 @@ namespace Reusable_project_Form_
                     string proposalText = ProposalTextbox.Text;
                     int themeId = selectedTheme.ThemeId;
                     UserServiceReference.U_ServicesSoapClient s = new UserServiceReference.U_ServicesSoapClient();
-                    bool submissionSuccess = s.SubmitProposal(_userId, themeId, proposalText);
+                    bool submissionSuccess = s.SubmitProposal(1, themeId, proposalText);
 
                     if (submissionSuccess)
                     {
                         using (SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=False"))
                         {
-                            string query = "SELECT MAX(submissionId) AS submissionId FROM Submissions WHERE themeId = @themeId";
+                            string query = "SELECT submissionId FROM Submissions WHERE themeId = @themeId";
                             SqlCommand cmd = new SqlCommand(query, connection);
                             cmd.Parameters.AddWithValue("@themeId", themeId);
                             connection.Open();
@@ -100,19 +98,15 @@ namespace Reusable_project_Form_
                     MessageBox.Show("Please select a theme");
                 }
             }
-            catch (SqlException sqlEx)
-            {
-                MessageBox.Show($"SQL Error: {sqlEx.Message}");
-            }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error: {ex.Message}");
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            SubmitProposal submitProposal = new SubmitProposal(_userId);
+            SubmitProposal submitProposal = new SubmitProposal();
             submitProposal.Show();
             this.Hide();
         }

@@ -49,18 +49,19 @@
             this.durationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deadlineDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.budgetDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.themesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.themesBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.reusable_projectDataSet = new Reusable_project_Form_.Reusable_projectDataSet();
+            this.themesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label5 = new System.Windows.Forms.Label();
             this.themesTableAdapter = new Reusable_project_Form_.Reusable_projectDataSetTableAdapters.ThemesTableAdapter();
             this.themesBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.themesBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.button4 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.themesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.reusable_projectDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.themesBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.themesBindingSource2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.reusable_projectDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.themesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.themesBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -261,15 +262,20 @@
             this.budgetDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.budgetDataGridViewTextBoxColumn.Name = "budgetDataGridViewTextBoxColumn";
             // 
-            // themesBindingSource
+            // themesBindingSource2
             // 
-            this.themesBindingSource.DataMember = "Themes";
-            this.themesBindingSource.DataSource = this.reusable_projectDataSet;
+            this.themesBindingSource2.DataMember = "Themes";
+            this.themesBindingSource2.DataSource = this.reusable_projectDataSet;
             // 
             // reusable_projectDataSet
             // 
             this.reusable_projectDataSet.DataSetName = "Reusable_projectDataSet";
             this.reusable_projectDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // themesBindingSource
+            // 
+            this.themesBindingSource.DataMember = "Themes";
+            this.themesBindingSource.DataSource = this.reusable_projectDataSet;
             // 
             // label5
             // 
@@ -290,16 +296,22 @@
             this.themesBindingSource1.DataMember = "Themes";
             this.themesBindingSource1.DataSource = this.reusable_projectDataSet;
             // 
-            // themesBindingSource2
+            // button4
             // 
-            this.themesBindingSource2.DataMember = "Themes";
-            this.themesBindingSource2.DataSource = this.reusable_projectDataSet;
+            this.button4.Location = new System.Drawing.Point(936, 26);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(142, 58);
+            this.button4.TabIndex = 20;
+            this.button4.Text = "Assign Refree to Submission";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1101, 610);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
@@ -309,10 +321,10 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.themesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.reusable_projectDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.themesBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.themesBindingSource2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.reusable_projectDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.themesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.themesBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -346,5 +358,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.BindingSource themesBindingSource1;
         private System.Windows.Forms.BindingSource themesBindingSource2;
+        private System.Windows.Forms.Button button4;
     }
 }

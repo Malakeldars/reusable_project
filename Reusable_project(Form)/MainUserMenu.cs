@@ -30,7 +30,7 @@ namespace Reusable_project_Form_
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SubmitProposal submitProposal = new SubmitProposal(_userId);
+            SubmitProposal submitProposal = new SubmitProposal();
             submitProposal.Show();
             this.Hide();
         }
