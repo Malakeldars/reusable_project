@@ -66,7 +66,7 @@ namespace Reusable_project_Form_
                     //Referee.Show();
                 }
 
-                // Optionally hide the current login form
+
                 this.Hide();
             }
             else
