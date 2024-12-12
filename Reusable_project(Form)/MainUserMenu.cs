@@ -49,7 +49,9 @@ namespace Reusable_project_Form_
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            update_delete_proposal update_Delete_Proposal = new update_delete_proposal(_userId);
+            update_Delete_Proposal.Show();
+            this.Hide() ;
         }
 
         private void MainUserMenu_Load(object sender, EventArgs e)

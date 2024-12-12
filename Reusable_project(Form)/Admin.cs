@@ -17,14 +17,11 @@ namespace Reusable_project_Form_
         private int _adminId;
 
 
-        private SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=False"); 
+        private SqlConnection conn = new SqlConnection("Data Source=DESKTOP-2OD02U8\\SQLEXPRESS;Initial Catalog=Reuse_db;Persist Security Info=True;User ID=sa;Password=DC@122180"); 
         public Admin(int adminId)
         {
             InitializeComponent();
             _adminId = adminId;
-            InitializeComponent();
-
-
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -59,17 +56,17 @@ namespace Reusable_project_Form_
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
-            try
+           // try
             {
                 A_ServiceReference.A_ServicesSoapClient Admin = new A_ServiceReference.A_ServicesSoapClient();
                 Admin.Create_theme(textBox1.Text, textBox2.Text, dateTimePicker1.Value, float.Parse(textBox4.Text));
                 MessageBox.Show("Theme Added Successfully");
                 populate();
             }
-            catch {
+            //catch {
 
-                MessageBox.Show("There is an empty filled");
-            }
+              //  MessageBox.Show("There is an empty filled");
+            //}
         }
 
         private void button3_Click(object sender, EventArgs e)

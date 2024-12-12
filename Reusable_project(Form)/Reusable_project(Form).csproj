@@ -121,6 +121,12 @@
     <Compile Include="SubmitProposal.Designer.cs">
       <DependentUpon>SubmitProposal.cs</DependentUpon>
     </Compile>
+    <Compile Include="update_delete_proposal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="update_delete_proposal.Designer.cs">
+      <DependentUpon>update_delete_proposal.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="assign_ref_project.resx">
       <DependentUpon>assign_ref_project.cs</DependentUpon>
     </EmbeddedResource>
@@ -151,6 +157,9 @@
     </Compile>
     <EmbeddedResource Include="SubmitProposal.resx">
       <DependentUpon>SubmitProposal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="update_delete_proposal.resx">
+      <DependentUpon>update_delete_proposal.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Connected Services\A_ServiceReference\A_Services.wsdl" />
     <None Include="Connected Services\A_ServiceReference\Reusable_project_Form_.A_ServiceReference.Create_themeResponse.datasource">
