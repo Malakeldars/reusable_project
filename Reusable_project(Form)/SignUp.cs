@@ -103,5 +103,10 @@ namespace Reusable_project_Form_
         {
 
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

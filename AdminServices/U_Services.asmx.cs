@@ -19,7 +19,7 @@ namespace AdminServices
     // [System.Web.Script.Services.ScriptService]
     public class U_Services : System.Web.Services.WebService
     {
-         SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False");
+         SqlConnection connection = new SqlConnection("Data Source=LAPTOP-77LHTH18\\SQLEXPRESS01;Initial Catalog=Reusable_project;Integrated Security=True;Encrypt=False");
 
 
         [WebMethod]
@@ -27,7 +27,7 @@ namespace AdminServices
 
             try
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO Users (password,email,fullname) VALUES (@password,@fullname,@email)", connection);
+                SqlCommand cmd = new SqlCommand("INSERT INTO Users (password,email,fullname) VALUES (@password,@email,@fullname)", connection);
                 cmd.Parameters.AddWithValue("@password", password);
                 cmd.Parameters.AddWithValue("@fullname", fullname);
                 cmd.Parameters.AddWithValue("@email", email);

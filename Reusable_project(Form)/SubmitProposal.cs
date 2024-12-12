@@ -28,7 +28,7 @@ namespace Reusable_project_Form_
         {
             try
             {
-                using (SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False"))
+                using (SqlConnection connection = new SqlConnection("Data Source=LAPTOP-77LHTH18\\SQLEXPRESS01;Initial Catalog=Reusable_project;Integrated Security=True;Encrypt=False"))
                 {
                     string query = "SELECT themeId, name FROM Themes;";
                     SqlCommand cmd = new SqlCommand(query, connection);
@@ -70,7 +70,7 @@ namespace Reusable_project_Form_
 
                     if (submissionSuccess)
                     {
-                        using (SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=False"))
+                        using (SqlConnection connection = new SqlConnection("Data Source=LAPTOP-77LHTH18\\SQLEXPRESS01;Initial Catalog=Reusable_project;Integrated Security=True;Encrypt=False"))
                         {
                             string query = "SELECT MAX(submissionId) AS submissionId FROM Submissions WHERE themeId = @themeId";
                             SqlCommand cmd = new SqlCommand(query, connection);

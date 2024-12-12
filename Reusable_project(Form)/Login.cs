@@ -16,7 +16,7 @@ namespace Reusable_project_Form_
     {
 
 
-        private SqlConnection Connection = new SqlConnection("Data Source =.\\sqlexpress; Initial Catalog = reusable_proJectDB; Integrated Security = True; Encrypt=False");
+        private SqlConnection Connection = new SqlConnection("Data Source=LAPTOP-77LHTH18\\SQLEXPRESS01;Initial Catalog=Reusable_project;Integrated Security=True;Encrypt=False");
 
         public Login()
         {
@@ -84,14 +84,14 @@ namespace Reusable_project_Form_
             userId = -1;
             string role = null;
 
-            try
-            {
+            //try
+            //{
                 Connection.Open();
 
                 // Check for Admin
-                SqlCommand admincmd = new SqlCommand("SELECT AdminId FROM Admin WHERE Email = @Email AND Password = @Password", Connection);
-                admincmd.Parameters.AddWithValue("@Email", email);
-                admincmd.Parameters.AddWithValue("@Password", password);
+                SqlCommand admincmd = new SqlCommand("SELECT adminId FROM Admin WHERE username = @username AND password = @password", Connection);
+                admincmd.Parameters.AddWithValue("@username", email);
+                admincmd.Parameters.AddWithValue("@password", password);
 
                 var adminresult = admincmd.ExecuteScalar();
                 if (adminresult != null)
@@ -102,9 +102,9 @@ namespace Reusable_project_Form_
                 }
 
                 // Check for User
-                SqlCommand usercmd = new SqlCommand("SELECT UserId FROM Users WHERE Email = @Email AND Password = @Password", Connection);
-                usercmd.Parameters.AddWithValue("@Email", email);
-                usercmd.Parameters.AddWithValue("@Password", password);
+                SqlCommand usercmd = new SqlCommand("SELECT userId FROM Users WHERE email = @email AND password = @password", Connection);
+                usercmd.Parameters.AddWithValue("@email", email);
+                usercmd.Parameters.AddWithValue("@password", password);
 
                 var userresult = usercmd.ExecuteScalar();
                 if (userresult != null)
@@ -115,9 +115,9 @@ namespace Reusable_project_Form_
                 }
 
                 // Check for Referee
-                SqlCommand refcmd = new SqlCommand("SELECT refereesId FROM Referees WHERE Email = @email AND password = @password", Connection);
-                refcmd.Parameters.AddWithValue("@Email", email);
-                refcmd.Parameters.AddWithValue("@Password", password);
+                SqlCommand refcmd = new SqlCommand("SELECT refereesId FROM Referees WHERE email = @email AND password = @password", Connection);
+                refcmd.Parameters.AddWithValue("@email", email);
+                refcmd.Parameters.AddWithValue("@password", password);
 
 
                 var refresult = refcmd.ExecuteScalar();
@@ -128,20 +128,20 @@ namespace Reusable_project_Form_
                     return role;
                 }
 
-            }
-            catch (Exception ex)
-            {
+            //}
+            //catch (Exception ex)
+            //{
 
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
+            //    Console.WriteLine(ex.Message);
+            //}
+            //finally
+            //{
 
-                if (Connection.State == System.Data.ConnectionState.Open)
-                {
-                    Connection.Close();
-                }
-            }
+            //    if (Connection.State == System.Data.ConnectionState.Open)
+            //    {
+            //        Connection.Close();
+            //    }
+            //}
 
             // If no match found, return null
             return role;
