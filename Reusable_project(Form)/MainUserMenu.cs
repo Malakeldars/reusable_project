@@ -37,7 +37,7 @@ namespace Reusable_project_Form_
 
         private void SubmitRepButton_Click(object sender, EventArgs e)
         {
-            SubmitReport1 submitReport = new SubmitReport1();
+            SubmitReport1 submitReport = new SubmitReport1(_userId);
             submitReport.Show();
             this.Hide();
         }

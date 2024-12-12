@@ -35,12 +35,14 @@
             this.ReportTextboxLabel = new System.Windows.Forms.Label();
             this.IDTextboxLabel = new System.Windows.Forms.Label();
             this.ReportTextbox = new System.Windows.Forms.RichTextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.TitleTextbox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // IDTextbox
             // 
             this.IDTextbox.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.IDTextbox.Location = new System.Drawing.Point(51, 129);
+            this.IDTextbox.Location = new System.Drawing.Point(51, 114);
             this.IDTextbox.Name = "IDTextbox";
             this.IDTextbox.Size = new System.Drawing.Size(94, 22);
             this.IDTextbox.TabIndex = 21;
@@ -50,7 +52,7 @@
             // 
             this.CancelButton.BackColor = System.Drawing.SystemColors.ControlLight;
             this.CancelButton.Font = new System.Drawing.Font("Calibri Light", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CancelButton.Location = new System.Drawing.Point(172, 380);
+            this.CancelButton.Location = new System.Drawing.Point(173, 416);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.CancelButton.Size = new System.Drawing.Size(94, 29);
@@ -63,7 +65,7 @@
             // 
             this.SubmitButton.BackColor = System.Drawing.SystemColors.ControlLight;
             this.SubmitButton.Font = new System.Drawing.Font("Calibri Light", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SubmitButton.Location = new System.Drawing.Point(51, 380);
+            this.SubmitButton.Location = new System.Drawing.Point(52, 416);
             this.SubmitButton.Name = "SubmitButton";
             this.SubmitButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.SubmitButton.Size = new System.Drawing.Size(94, 29);
@@ -76,7 +78,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(44, 35);
+            this.label2.Location = new System.Drawing.Point(44, 23);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(249, 37);
             this.label2.TabIndex = 18;
@@ -86,7 +88,7 @@
             // 
             this.ReportTextboxLabel.AutoSize = true;
             this.ReportTextboxLabel.Font = new System.Drawing.Font("Calibri Light", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ReportTextboxLabel.Location = new System.Drawing.Point(47, 169);
+            this.ReportTextboxLabel.Location = new System.Drawing.Point(48, 214);
             this.ReportTextboxLabel.Name = "ReportTextboxLabel";
             this.ReportTextboxLabel.Size = new System.Drawing.Size(218, 21);
             this.ReportTextboxLabel.TabIndex = 17;
@@ -96,7 +98,7 @@
             // 
             this.IDTextboxLabel.AutoSize = true;
             this.IDTextboxLabel.Font = new System.Drawing.Font("Calibri Light", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IDTextboxLabel.Location = new System.Drawing.Point(47, 95);
+            this.IDTextboxLabel.Location = new System.Drawing.Point(47, 80);
             this.IDTextboxLabel.Name = "IDTextboxLabel";
             this.IDTextboxLabel.Size = new System.Drawing.Size(217, 21);
             this.IDTextboxLabel.TabIndex = 16;
@@ -105,17 +107,38 @@
             // ReportTextbox
             // 
             this.ReportTextbox.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ReportTextbox.Location = new System.Drawing.Point(50, 207);
+            this.ReportTextbox.Location = new System.Drawing.Point(51, 252);
             this.ReportTextbox.Name = "ReportTextbox";
             this.ReportTextbox.Size = new System.Drawing.Size(381, 148);
             this.ReportTextbox.TabIndex = 15;
             this.ReportTextbox.Text = "";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Calibri Light", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(48, 147);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(225, 21);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "Please enter your report\'s title:";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // TitleTextbox
+            // 
+            this.TitleTextbox.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.TitleTextbox.Location = new System.Drawing.Point(52, 180);
+            this.TitleTextbox.Name = "TitleTextbox";
+            this.TitleTextbox.Size = new System.Drawing.Size(280, 22);
+            this.TitleTextbox.TabIndex = 22;
             // 
             // SubmitReport1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.TitleTextbox);
             this.Controls.Add(this.IDTextbox);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.SubmitButton);
@@ -140,5 +163,7 @@
         private System.Windows.Forms.Label ReportTextboxLabel;
         private System.Windows.Forms.Label IDTextboxLabel;
         private System.Windows.Forms.RichTextBox ReportTextbox;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox TitleTextbox;
     }
 }

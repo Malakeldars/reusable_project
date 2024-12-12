@@ -13,10 +13,15 @@ using static Reusable_project_Form_.SubmitProposal;
 namespace Reusable_project_Form_
 {
     public partial class SubmitReport1 : Form
+
     {
-        public SubmitReport1()
+        int _userId;
+        public SubmitReport1(int userId)
         {
             InitializeComponent();
+            _userId = userId;
+            InitializeComponent();
+
         }
 
         private void IDTextbox_TextChanged(object sender, EventArgs e)
@@ -26,17 +31,18 @@ namespace Reusable_project_Form_
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            try
+            //try
             {
                 if (IDTextbox != null)
                 {
-                    int submissionId = int.Parse(IDTextbox.Text);
+                    int submissionId = int.Parse(IDTextbox.Text.Trim());
+                    string reportTitle = TitleTextbox.Text;
                     U_ServiceReference.U_ServicesSoapClient s = new U_ServiceReference.U_ServicesSoapClient();
-                    bool submissionSuccess = s.SubmitReport(submissionId,ReportTextbox.Text);
+                    bool submissionSuccess = s.SubmitReport(submissionId,reportTitle,ReportTextbox.Text);
 
                     if (submissionSuccess)
                     {
-                        using (SqlConnection connection = new SqlConnection("Data Source=DESKTOP-2OD02U8\\SQLEXPRESS;Initial Catalog=Reuse_db;Persist Security Info=True;User ID=sa;Password=DC@122180"))
+                        using (SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=False"))
                         {
                             string query = "SELECT MAX(ReportId) AS ReportId FROM Reports WHERE SubmissionId = @submissionId";
                             SqlCommand cmd = new SqlCommand(query, connection);
@@ -64,18 +70,25 @@ namespace Reusable_project_Form_
                     MessageBox.Show("Please enter your project's submission ID");
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error: " + ex.Message);
-            }
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Error: " + ex.Message);
+            //}
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-
+            MainUserMenu mainUserMenu= new MainUserMenu(_userId);
+            mainUserMenu.Show();
+            this.Hide();
         }
 
         private void SubmitReport1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
         {
 
         }
