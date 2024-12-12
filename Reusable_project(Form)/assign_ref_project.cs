@@ -52,7 +52,7 @@ namespace Reusable_project_Form_
 
         private void LoadSubmissions()
         {
-            string query = "SELECT submissionId, proposal FROM Submissions WHERE status = 'Pending'";
+            string query = "SELECT submissionId, title FROM Submissions WHERE status = 'Pending'";
             try
             {
                 SqlDataAdapter adapter = new SqlDataAdapter(query, Connection);
@@ -62,7 +62,7 @@ namespace Reusable_project_Form_
                 if (dt.Rows.Count > 0)
                 {
                     submit_combobox.DataSource = dt;
-                    submit_combobox.DisplayMember = "proposal";
+                    submit_combobox.DisplayMember = "title";
                     submit_combobox.ValueMember = "submissionId";
                 }
                 else
@@ -79,7 +79,7 @@ namespace Reusable_project_Form_
             private void LoadAssignments()
         {
             string query = @"
-            SELECT sr.RefereeID, r.username AS Username, sr.SubmissionId, s.proposal AS proposal
+            SELECT sr.RefereeID, r.username AS Username, sr.SubmissionId, s.title AS title
             FROM SubmissionReferees sr
             JOIN Referees r ON sr.RefereeId = r.refereesId
             JOIN Submissions s ON sr.submissionId = s.SubmissionId";
