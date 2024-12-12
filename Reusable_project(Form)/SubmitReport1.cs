@@ -20,8 +20,6 @@ namespace Reusable_project_Form_
         {
             InitializeComponent();
             _userId = userId;
-            InitializeComponent();
-
         }
 
         private void IDTextbox_TextChanged(object sender, EventArgs e)
@@ -31,49 +29,58 @@ namespace Reusable_project_Form_
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            //try
+            try
             {
-                if (IDTextbox != null)
-                {
-                    int submissionId = int.Parse(IDTextbox.Text.Trim());
-                    string reportTitle = TitleTextbox.Text;
-                    U_ServiceReference.U_ServicesSoapClient s = new U_ServiceReference.U_ServicesSoapClient();
-                    bool submissionSuccess = s.SubmitReport(submissionId,reportTitle,ReportTextbox.Text);
 
-                    if (submissionSuccess)
+                string inputText = IDTextbox.Text?.Trim();
+                if (!string.IsNullOrEmpty(inputText))
+                {
+                    if (int.TryParse(inputText, out int submissionId))
                     {
-                        using (SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=False"))
+                        string reportTitle = TitleTextbox.Text;
+                        U_ServiceReference.U_ServicesSoapClient s = new U_ServiceReference.U_ServicesSoapClient();
+                        bool submissionSuccess = s.SubmitReport(submissionId, reportTitle, ReportTextbox.Text);
+
+                        if (submissionSuccess)
                         {
-                            string query = "SELECT MAX(ReportId) AS ReportId FROM Reports WHERE SubmissionId = @submissionId";
-                            SqlCommand cmd = new SqlCommand(query, connection);
-                            cmd.Parameters.AddWithValue("@submissionId", submissionId);
-                            connection.Open();
-                            SqlDataReader reader = cmd.ExecuteReader();
-                            if (reader.Read())
+                            using (SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=False"))
                             {
-                                int reportId = (int)reader["ReportId"];
-                                MessageBox.Show("Your report ID is: " + reportId.ToString());
+                                string query = "SELECT MAX(ReportId) AS ReportId FROM Reports WHERE SubmissionId = @submissionId";
+                                SqlCommand cmd = new SqlCommand(query, connection);
+                                cmd.Parameters.AddWithValue("@submissionId", submissionId);
+                                connection.Open();
+                                SqlDataReader reader = cmd.ExecuteReader();
+                                if (reader.Read() && reader["ReportId"] != DBNull.Value)
+                                {
+                                    int reportId = (int)reader["ReportId"];
+                                    MessageBox.Show("Your report ID is: " + reportId.ToString());
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Submission ID not found in the database.");
+                                }
+                                reader.Close();
                             }
-                            else
-                            {
-                                MessageBox.Show("Submission ID not found in the database.");
-                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Submission failed.");
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Submission failed.");
+                        MessageBox.Show("Please enter a valid numeric submission ID.");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Please enter your project's submission ID");
+                    MessageBox.Show("Please enter your project's submission ID.");
                 }
             }
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Error: " + ex.Message);
-            //}
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
         }
 
         private void CancelButton_Click(object sender, EventArgs e)

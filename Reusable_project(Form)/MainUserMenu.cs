@@ -19,8 +19,6 @@ namespace Reusable_project_Form_
         {
             InitializeComponent();
             _userId = userId;
-            InitializeComponent();
-
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -30,7 +28,7 @@ namespace Reusable_project_Form_
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SubmitProposal submitProposal = new SubmitProposal();
+            SubmitProposal submitProposal = new SubmitProposal(_userId);
             submitProposal.Show();
             this.Hide();
         }

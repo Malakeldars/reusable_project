@@ -13,10 +13,11 @@ namespace Reusable_project_Form_
 {
     public partial class SubmitProposal : Form
     {
-
-        public SubmitProposal()
+        int _userId;
+        public SubmitProposal(int userId)
         {
             InitializeComponent();
+            _userId = userId;
         }
         public class Theme
         {
@@ -107,8 +108,8 @@ namespace Reusable_project_Form_
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            SubmitProposal submitProposal = new SubmitProposal();
-            submitProposal.Show();
+            MainUserMenu mainUserMenu = new MainUserMenu(_userId);
+            mainUserMenu.Show();
             this.Hide();
         }
 
