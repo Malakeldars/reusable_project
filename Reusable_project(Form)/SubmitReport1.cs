@@ -13,10 +13,15 @@ using static Reusable_project_Form_.SubmitProposal;
 namespace Reusable_project_Form_
 {
     public partial class SubmitReport1 : Form
+
     {
-        public SubmitReport1()
+        int _userId;
+        public SubmitReport1(int userId)
         {
             InitializeComponent();
+            _userId = userId;
+            InitializeComponent();
+
         }
 
         private void IDTextbox_TextChanged(object sender, EventArgs e)
@@ -72,7 +77,9 @@ namespace Reusable_project_Form_
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-
+            MainUserMenu mainUserMenu= new MainUserMenu(_userId);
+            mainUserMenu.Show();
+            this.Hide();
         }
 
         private void SubmitReport1_Load(object sender, EventArgs e)

@@ -13,9 +13,11 @@ namespace Reusable_project_Form_
 {
     public partial class SubmitProposal : Form
     {
-
-        public SubmitProposal()
+        int _userId;
+        public SubmitProposal(int userId)
         {
+            InitializeComponent();
+            _userId = userId;
             InitializeComponent();
         }
         public class Theme
@@ -42,8 +44,8 @@ namespace Reusable_project_Form_
                             Name = reader["name"].ToString()
                         });
                     }
-                    ThemesCombobox.ValueMember = "ThemeId";
-                    ThemesCombobox.DisplayMember = "Name";
+                    ThemesCombobox.ValueMember = "themeId";
+                    ThemesCombobox.DisplayMember = "name";
                 }
             }
             catch
@@ -66,7 +68,7 @@ namespace Reusable_project_Form_
                     string proposalText = ProposalTextbox.Text;
                     int themeId = selectedTheme.ThemeId;
                     UserServiceReference.U_ServicesSoapClient s = new UserServiceReference.U_ServicesSoapClient();
-                    bool submissionSuccess = s.SubmitProposal(1, themeId, proposalText);
+                    bool submissionSuccess = s.SubmitProposal(_userId, themeId, proposalText);
 
                     if (submissionSuccess)
                     {
@@ -98,15 +100,19 @@ namespace Reusable_project_Form_
                     MessageBox.Show("Please select a theme");
                 }
             }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show($"SQL Error: {sqlEx.Message}");
+            }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show($"Error: {ex.Message}");
             }
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            SubmitProposal submitProposal = new SubmitProposal();
+            SubmitProposal submitProposal = new SubmitProposal(_userId);
             submitProposal.Show();
             this.Hide();
         }

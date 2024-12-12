@@ -59,7 +59,7 @@ namespace AdminServices
             try
             {
                 DataTable dt = new DataTable("Themes");
-                SqlCommand cmd = new SqlCommand("SELECT * FROM THEMES", connection);
+                SqlCommand cmd = new SqlCommand("SELECT themeId,name FROM THEMES", connection);
                 connection.Open();
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                 dataAdapter.Fill(dt);
