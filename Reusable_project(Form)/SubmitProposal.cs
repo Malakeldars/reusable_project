@@ -13,10 +13,11 @@ namespace Reusable_project_Form_
 {
     public partial class SubmitProposal : Form
     {
-
-        public SubmitProposal()
+        int _userId;
+        public SubmitProposal(int userId)
         {
             InitializeComponent();
+            _userId = userId;
         }
         public class Theme
         {
@@ -28,7 +29,7 @@ namespace Reusable_project_Form_
         {
             try
             {
-                using (SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False"))
+                using (SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=False"))
                 {
                     string query = "SELECT themeId, name FROM Themes;";
                     SqlCommand cmd = new SqlCommand(query, connection);
@@ -64,15 +65,16 @@ namespace Reusable_project_Form_
                 if (ThemesCombobox.SelectedItem is Theme selectedTheme)
                 {
                     string proposalText = ProposalTextbox.Text;
+                    string titleText = TitleTextbox.Text;
                     int themeId = selectedTheme.ThemeId;
                     UserServiceReference.U_ServicesSoapClient s = new UserServiceReference.U_ServicesSoapClient();
-                    bool submissionSuccess = s.SubmitProposal(1, themeId, proposalText);
+                    bool submissionSuccess = s.SubmitProposal(1, themeId,titleText, proposalText);
 
                     if (submissionSuccess)
                     {
                         using (SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=False"))
                         {
-                            string query = "SELECT MAX(submissionId) AS submissionId FROM Submissions WHERE themeId = @themeId";
+                            string query = "SELECT MAX(submissionId) AS submissionId FROM Submissions WHERE themeId = @themeId;";
                             SqlCommand cmd = new SqlCommand(query, connection);
                             cmd.Parameters.AddWithValue("@themeId", themeId);
                             connection.Open();
@@ -106,9 +108,14 @@ namespace Reusable_project_Form_
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            SubmitProposal submitProposal = new SubmitProposal();
-            submitProposal.Show();
+            MainUserMenu mainUserMenu = new MainUserMenu(_userId);
+            mainUserMenu.Show();
             this.Hide();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -19,7 +19,7 @@ namespace AdminServices
     // [System.Web.Script.Services.ScriptService]
     public class U_Services : System.Web.Services.WebService
     {
-         SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False");
+        SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=False");
 
 
         [WebMethod]
@@ -59,7 +59,7 @@ namespace AdminServices
             try
             {
                 DataTable dt = new DataTable("Themes");
-                SqlCommand cmd = new SqlCommand("SELECT * FROM THEMES", connection);
+                SqlCommand cmd = new SqlCommand("SELECT themeId,name FROM THEMES", connection);
                 connection.Open();
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                 dataAdapter.Fill(dt);
@@ -128,12 +128,13 @@ namespace AdminServices
             }
         }
         [WebMethod]
-        public bool SubmitProposal(int userid, int themeid,string proposal)
+        public bool SubmitProposal(int userid, int themeid, string title, string proposal)
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO Submissions (userid,themeid,proposal) VALUES (@userid, @themeid, @proposal) ", connection);
+                SqlCommand cmd = new SqlCommand("INSERT INTO Submissions (userid,themeid,title,proposal) VALUES (@userid, @themeid, @title, @proposal) ", connection);
                 cmd.Parameters.AddWithValue("@proposal", proposal);
+                cmd.Parameters.AddWithValue("@title", title);
                 cmd.Parameters.AddWithValue("@userid", userid);
                 cmd.Parameters.AddWithValue("@themeid", themeid);
                 connection.Open();
@@ -155,12 +156,13 @@ namespace AdminServices
         }
 
         [WebMethod]
-        public bool SubmitReport(int submissionid,string report)
+        public bool SubmitReport(int submissionid,string title,string report)
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO Reports (SubmissionID,reportcontent) VALUES (@submissionid, @report) ", connection);
+                SqlCommand cmd = new SqlCommand("INSERT INTO Reports (SubmissionID,title,reportcontent) VALUES (@submissionid, @title, @report) ", connection);
                 cmd.Parameters.AddWithValue("@submissionid", submissionid);
+                cmd.Parameters.AddWithValue("@title", title);
                 cmd.Parameters.AddWithValue("@report", report);
                 connection.Open();
                 int result = cmd.ExecuteNonQuery();

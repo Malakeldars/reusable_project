@@ -17,7 +17,7 @@ namespace Reusable_project_Form_
         private int _adminId;
 
 
-        SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False");
+        private SqlConnection conn = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=False"); 
         public Admin(int adminId)
         {
             InitializeComponent();
@@ -153,6 +153,13 @@ namespace Reusable_project_Form_
             }
 
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            assign_ref_project assign_Ref_Project = new assign_ref_project(_adminId);
+            assign_Ref_Project.Show();
+            this.Hide();
         }
     }
 }
