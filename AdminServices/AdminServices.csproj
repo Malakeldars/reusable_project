@@ -70,6 +70,7 @@
     <Content Include="A_Services.asmx" />
     <Content Include="R_Service.asmx" />
     <Content Include="U_Services.asmx" />
+    <Content Include="ValidatorService.asmx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -84,6 +85,10 @@
     </Compile>
     <Compile Include="U_Services.asmx.cs">
       <DependentUpon>U_Services.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ValidatorService.asmx.cs">
+      <DependentUpon>ValidatorService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
