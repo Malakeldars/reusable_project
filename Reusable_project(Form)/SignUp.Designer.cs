@@ -139,7 +139,7 @@
             this.ShowPasswordCheck.Name = "ShowPasswordCheck";
             this.ShowPasswordCheck.Size = new System.Drawing.Size(148, 24);
             this.ShowPasswordCheck.TabIndex = 38;
-            this.ShowPasswordCheck.Text = "Show Pssowerd";
+            this.ShowPasswordCheck.Text = "Show Password";
             this.ShowPasswordCheck.UseVisualStyleBackColor = true;
             this.ShowPasswordCheck.CheckedChanged += new System.EventHandler(this.ShowPasswordCheck_CheckedChanged_1);
             // 
