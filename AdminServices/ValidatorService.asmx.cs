@@ -25,6 +25,8 @@ namespace AdminServices
             UserValidationResponse response = new UserValidationResponse
             {
                 UserId = -1,
+                FullName = null,
+                Email = email,
                 Role = null,
                 Message = "Invalid credentials."
             };
@@ -36,44 +38,54 @@ namespace AdminServices
                     connection.Open();
 
                     // Check for Admin
-                    SqlCommand adminCmd = new SqlCommand("SELECT AdminId FROM Admin WHERE Email = @Email AND Password = @Password", connection);
+                    SqlCommand adminCmd = new SqlCommand("SELECT adminId, username FROM Admin WHERE Email = @Email AND Password = @Password", connection);
                     adminCmd.Parameters.AddWithValue("@Email", email);
                     adminCmd.Parameters.AddWithValue("@Password", password);
 
-                    var adminResult = adminCmd.ExecuteScalar();
-                    if (adminResult != null)
+                    using (var adminReader = adminCmd.ExecuteReader())
                     {
-                        response.UserId = Convert.ToInt32(adminResult);
-                        response.Role = "Admin";
-                        response.Message = "Authentication successful.";
-                        return response;
+                        if (adminReader.Read()) // Check if any row was returned
+                        {
+                            response.UserId = Convert.ToInt32(adminReader["adminId"]);
+                            response.FullName = adminReader["username"].ToString();
+                            response.Role = "Admin";
+                            response.Message = "Authentication successful.";
+                            return response;
+                        }
                     }
 
                     // Check for User
-                    SqlCommand userCmd = new SqlCommand("SELECT UserId FROM Users WHERE Email = @Email AND Password = @Password", connection);
+                    SqlCommand userCmd = new SqlCommand("SELECT userId, fullname FROM Users WHERE Email = @Email AND Password = @Password", connection);
                     userCmd.Parameters.AddWithValue("@Email", email);
                     userCmd.Parameters.AddWithValue("@Password", password);
 
-                    var userResult = userCmd.ExecuteScalar();
-                    if (userResult != null)
+                    using (var userReader = userCmd.ExecuteReader())
                     {
-                        response.UserId = Convert.ToInt32(userResult);
-                        response.Role = "User";
-                        response.Message = "Authentication successful.";
-                        return response;
+                        if (userReader.Read()) // Check if any row was returned
+                        {
+                            response.UserId = Convert.ToInt32(userReader["userId"]);
+                            response.FullName = userReader["fullname"].ToString();
+                            response.Role = "User";
+                            response.Message = "Authentication successful.";
+                            return response;
+                        }
                     }
+
                     // Check for Referee
-                    SqlCommand refCmd = new SqlCommand("SELECT RefereesId FROM Referees WHERE Email = @Email AND Password = @Password", connection);
+                    SqlCommand refCmd = new SqlCommand("SELECT refereesId, Fullname FROM Referees WHERE Email = @Email AND Password = @Password", connection);
                     refCmd.Parameters.AddWithValue("@Email", email);
                     refCmd.Parameters.AddWithValue("@Password", password);
 
-                    var refResult = refCmd.ExecuteScalar();
-                    if (refResult != null)
+                    using (var refReader = refCmd.ExecuteReader())
                     {
-                        response.UserId = Convert.ToInt32(refResult);
-                        response.Role = "Referee";
-                        response.Message = "Authentication successful.";
-                        return response;
+                        if (refReader.Read()) // Check if any row was returned
+                        {
+                            response.UserId = Convert.ToInt32(refReader["refereesId"]);
+                            response.FullName = refReader["Fullname"].ToString();
+                            response.Role = "Referee";
+                            response.Message = "Authentication successful.";
+                            return response;
+                        }
                     }
                 }
             }
@@ -89,6 +101,10 @@ namespace AdminServices
         public class UserValidationResponse
         {
             public int UserId { get; set; }
+
+            public string FullName { get; set; }
+
+            public string Email { get; set; }
             public string Role { get; set; }
             public string Message { get; set; }
         }

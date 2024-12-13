@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="A_Services.asmx" />
+    <Content Include="Global.asax" />
     <Content Include="R_Service.asmx" />
     <Content Include="U_Services.asmx" />
     <Content Include="ValidatorService.asmx" />
@@ -78,11 +79,15 @@
       <DependentUpon>A_Services.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="R_Service.asmx.cs">
       <DependentUpon>R_Service.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UserProfile.cs" />
     <Compile Include="U_Services.asmx.cs">
       <DependentUpon>U_Services.asmx</DependentUpon>
       <SubType>Component</SubType>
