@@ -182,8 +182,34 @@ namespace AdminServices
 
             }
         }
+
+        [WebMethod]
+        public DataTable Ref_id_name_table()
+        {
+            try
+            {
+                DataTable dt = new DataTable("Referees");
+                SqlCommand cmd = new SqlCommand("SELECT refereesId,Username FROM Referees", connection);
+                connection.Open();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                dataAdapter.Fill(dt);
+                return dt;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+
+
+            }
+        }
+        } 
     }
 
-
-}
 
