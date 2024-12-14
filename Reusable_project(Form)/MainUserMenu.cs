@@ -17,10 +17,7 @@ namespace Reusable_project_Form_
 
         public MainUserMenu(int userId)
         {
-            InitializeComponent();
             _userId = userId;
-            InitializeComponent();
-
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -30,14 +27,14 @@ namespace Reusable_project_Form_
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SubmitProposal submitProposal = new SubmitProposal();
+            SubmitProposal submitProposal = new SubmitProposal(_userId);
             submitProposal.Show();
             this.Hide();
         }
 
         private void SubmitRepButton_Click(object sender, EventArgs e)
         {
-            SubmitReport1 submitReport = new SubmitReport1();
+            SubmitReport1 submitReport = new SubmitReport1(_userId);
             submitReport.Show();
             this.Hide();
         }
@@ -49,7 +46,9 @@ namespace Reusable_project_Form_
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            update_delete_proposal update_Delete_Proposal = new update_delete_proposal(_userId);
+            update_Delete_Proposal.Show();
+            this.Hide() ;
         }
 
         private void MainUserMenu_Load(object sender, EventArgs e)

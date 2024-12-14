@@ -52,7 +52,8 @@ namespace Reusable_project_Form_
 
         private void LoadSubmissions()
         {
-            string query = "SELECT submissionId, title FROM Submissions WHERE status = 'Pending'";
+            string query = "SELECT submissionId, title FROM Submissions WHERE status = 'Pending' OR status = 'Awaiting modification'";
+
             try
             {
                 SqlDataAdapter adapter = new SqlDataAdapter(query, Connection);
