@@ -43,24 +43,27 @@ namespace Reusable_project_Form_
                 return;
             }
 
-            string role = ValidateUser(email, password, out int userId);
+            ValidatorService.ValidatorServiceSoapClient client = new ValidatorService.ValidatorServiceSoapClient();
+
+            var response = client.ValidateUser(email, password);
 
 
-            if (role != null)
+
+            if (response.Role != null)
             {
-                MessageBox.Show($"Welcome, {role}!");
+                MessageBox.Show($"Welcome, {response.Role}!");
 
-                if (role == "Admin")
+                if (response.Role == "Admin")
                 {
-                    Admin Admin = new Admin(userId);
+                    Admin Admin = new Admin(response.UserId);
                     Admin.Show();
                 }
-                else if (role == "User")
+                else if (response.Role == "User")
                 {
-                    MainUserMenu MainUserMenu = new MainUserMenu(userId);
+                    MainUserMenu MainUserMenu = new MainUserMenu(response.UserId);
                     MainUserMenu.Show();
                 }
-                else if (role == "Referee")
+                else if (response.Role == "Referee")
                 {
                     //Referee Referee = new Referee(userId);
                     //Referee.Show();
@@ -78,75 +81,7 @@ namespace Reusable_project_Form_
 
 
 
-        // validate and find the user type
-        private string ValidateUser(string email, string password, out int userId)
-        {
-            userId = -1;
-            string role = null;
-
-            try
-            {
-                Connection.Open();
-
-                // Check for Admin
-                SqlCommand admincmd = new SqlCommand("SELECT adminId FROM Admin WHERE email = @email AND password = @password", Connection);
-                admincmd.Parameters.AddWithValue("@Email", email);
-                admincmd.Parameters.AddWithValue("@Password", password);
-
-                var adminresult = admincmd.ExecuteScalar();
-                if (adminresult != null)
-                {
-                    userId = Convert.ToInt32(adminresult);
-                    role = "Admin";
-                    return role;
-                }
-
-                // Check for User
-                SqlCommand usercmd = new SqlCommand("SELECT userId FROM Users WHERE email = @email AND password = @password", Connection);
-                usercmd.Parameters.AddWithValue("@Email", email);
-                usercmd.Parameters.AddWithValue("@Password", password);
-
-                var userresult = usercmd.ExecuteScalar();
-                if (userresult != null)
-                {
-                    userId = Convert.ToInt32(userresult);
-                    role = "User";
-                    return role;
-                }
-
-                // Check for Referee
-                SqlCommand refcmd = new SqlCommand("SELECT refereesId FROM Referees WHERE Email = @email AND password = @password", Connection);
-                refcmd.Parameters.AddWithValue("@Email", email);
-                refcmd.Parameters.AddWithValue("@Password", password);
-
-
-                var refresult = refcmd.ExecuteScalar();
-                if (refresult != null)
-                {
-                    userId = Convert.ToInt32(refresult);
-                    role = "Referee";
-                    return role;
-                }
-
-            }
-            catch (Exception ex)
-            {
-
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-
-                if (Connection.State == System.Data.ConnectionState.Open)
-                {
-                    Connection.Close();
-                }
-            }
-
-            // If no match found, return null
-            return role;
-        }
-
+        
 
 
         private void SignUpPagebtn_Click_1(object sender, EventArgs e)

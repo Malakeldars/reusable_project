@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,6 +10,9 @@ using System.Web.UI.WebControls;
 
 namespace AdminServices
 {
+
+   
+
     /// <summary>
     /// Summary description for U_Services
     /// </summary>
@@ -17,9 +21,11 @@ namespace AdminServices
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     // [System.Web.Script.Services.ScriptService]
-    public class U_Services : System.Web.Services.WebService
+
+
+    public class U_Services : System.Web.Services.WebService    
     {
-        SqlConnection connection = new SqlConnection("Data Source=DESKTOP-2OD02U8\\SQLEXPRESS;Initial Catalog=Reuse_db;Persist Security Info=True;User ID=sa;Password=DC@122180");
+        SqlConnection connection = new SqlConnection("Data Source=DESKTOP-2OD02U8\\SQLEXPRESS;Initial Catalog=Reuse_db;Integrated Security=True");
 
 
         [WebMethod]
@@ -50,6 +56,44 @@ namespace AdminServices
  
 
         }
+
+        [WebMethod]
+        public UserProfile LogIn(string email, string password)
+        {
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand("SELECT fullname, userId FROM Users WHERE password = @password AND email = @email", connection))
+                {
+                    cmd.Parameters.AddWithValue("@password", password);
+                    cmd.Parameters.AddWithValue("@email", email);
+
+                    connection.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows && reader.Read()) // Read the first row
+                        {
+                            string fullname = reader["fullname"].ToString();
+                            int id = Convert.ToInt32(reader["userId"]);
+                            return new UserProfile(true, fullname, id);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.ToString());
+            }
+            finally
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+
+            return new UserProfile(false); // Return failure result
+        }
+
 
 
         [WebMethod]
@@ -184,3 +228,4 @@ namespace AdminServices
 
     }
 }
+

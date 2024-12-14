@@ -19,7 +19,7 @@ namespace AdminServices
     {
 
 
-        SqlConnection connection = new SqlConnection("Data Source=DESKTOP-2OD02U8\\SQLEXPRESS;Initial Catalog=Reuse_db;Persist Security Info=True;User ID=sa;Password=DC@122180");
+        SqlConnection connection = new SqlConnection("Data Source=DESKTOP-2OD02U8\\SQLEXPRESS;Initial Catalog=Reuse_db;Integrated Security=True");
 
         [WebMethod]
         public bool Create_theme(String Name, String Duration, DateTime Deadline, float Budget)
@@ -36,7 +36,7 @@ namespace AdminServices
 
                 bool success = result > 0;
                 return success;
-        }
+            }
             catch
             {
                 return false;
@@ -47,7 +47,7 @@ namespace AdminServices
                 {
                     connection.Close();
                 }
-}
+            }
 
         }
 
@@ -103,43 +103,54 @@ namespace AdminServices
         }
 
         [WebMethod]
-        public bool AssignRefereeToProject(int projectId, int refereeId)
+        public string AssignReferee(int refereeId, int submissionId)
         {
-            // Validate the inputs
-            if (projectId <= 0 || refereeId <= 0)
-            {
-                return false;
-            }
-
+            string query = "INSERT INTO SubmissionReferees (RefereeId, SubmissionId) VALUES (@RefereeId, @SubmissionId)";
             try
             {
-                using (connection)
+                using (SqlConnection connection = new SqlConnection("Data Source=DESKTOP-2OD02U8\\SQLEXPRESS;Initial Catalog=Reuse_db;Integrated Security=True"))
                 {
-                    // Open the connection to the database
-                    connection.Open();
-
-                    // SQL query to insert a referee assignment
-                    string query = "INSERT INTO ProjectReferees (ProjectID, RefereeID) VALUES (@ProjectID, @RefereeID)";
-
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
-                        // Add parameters to the SQL query
-                        cmd.Parameters.AddWithValue("@ProjectID", projectId);
-                        cmd.Parameters.AddWithValue("@RefereeID", refereeId);
+                        cmd.Parameters.AddWithValue("@RefereeId", refereeId);
+                        cmd.Parameters.AddWithValue("@SubmissionId", submissionId);
 
-                        // Execute the query
+                        connection.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                return "Referee assigned successfully.";
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        [WebMethod]
+        public string UnassignReferee(int refereeId, int submissionId)
+        {
+            string query = "DELETE FROM SubmissionReferees WHERE RefereeId = @RefereeId AND SubmissionId = @SubmissionId";
+            try
+            {
+                using (SqlConnection connection = new SqlConnection("Data Source=DESKTOP-2OD02U8\\SQLEXPRESS;Initial Catalog=Reuse_db;Integrated Security=True"))
+                {
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@RefereeId", refereeId);
+                        cmd.Parameters.AddWithValue("@SubmissionId", submissionId);
+
+                        connection.Open();
                         int rowsAffected = cmd.ExecuteNonQuery();
-
-                        // If one row was inserted, the assignment was successful
-                        return rowsAffected > 0;
+                        return rowsAffected > 0
+                            ? "Referee unassigned successfully."
+                            : "No matching record found to unassign.";
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Log the exception or handle it as necessary
-                Console.WriteLine("Error: " + ex.Message);
-                return false;
+                return "Error: " + ex.Message;
             }
         }
     }

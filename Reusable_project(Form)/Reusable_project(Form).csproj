@@ -75,6 +75,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\ValidatorService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Reusable_projectDataSet.cs">
       <DependentUpon>Reusable_projectDataSet.xsd</DependentUpon>
     </Compile>
@@ -171,6 +176,13 @@
     <None Include="Connected Services\R_ServiceReference\R_Service.wsdl" />
     <None Include="Connected Services\UserServiceReference\U_Services.wsdl" />
     <None Include="Connected Services\U_ServiceReference\U_Services.wsdl" />
+    <None Include="Connected Services\ValidatorService\Reusable_project_Form_.ValidatorService.UserValidationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ValidatorService\Reusable_project_Form_.ValidatorService.ValidateUserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ValidatorService\ValidatorService.wsdl" />
     <None Include="Properties\DataSources\System.Data.DataTable.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -204,6 +216,7 @@
     <WCFMetadataStorage Include="Connected Services\R_ServiceReference\" />
     <WCFMetadataStorage Include="Connected Services\UserServiceReference\" />
     <WCFMetadataStorage Include="Connected Services\U_ServiceReference\" />
+    <WCFMetadataStorage Include="Connected Services\ValidatorService\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\U_ServiceReference\U_Services.disco" />
@@ -261,6 +274,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\UserServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ValidatorService\ValidatorService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ValidatorService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ValidatorService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ValidatorService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

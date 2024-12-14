@@ -19,7 +19,7 @@ namespace AdminServices
     // [System.Web.Script.Services.ScriptService]
     public class R_Service : System.Web.Services.WebService
     {
-        SqlConnection connection = new SqlConnection("Data Source=DESKTOP-2OD02U8\\SQLEXPRESS;Initial Catalog=Reuse_db;Persist Security Info=True;User ID=sa;Password=DC@122180");
+        SqlConnection connection = new SqlConnection("Data Source=DESKTOP-2OD02U8\\SQLEXPRESS;Initial Catalog=Reuse_db;Integrated Security=True");
 
 
         [WebMethod]
@@ -35,6 +35,45 @@ namespace AdminServices
             return success;
 
         }
+
+
+        [WebMethod]
+        public UserProfile LogIn(string email, string password)
+        {
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand("SELECT fullname, refereesId FROM Referees WHERE password = @password AND email = @email", connection))
+                {
+                    cmd.Parameters.AddWithValue("@password", password);
+                    cmd.Parameters.AddWithValue("@email", email);
+
+                    connection.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows && reader.Read()) // Read the first row
+                        {
+                            string fullname = reader["fullname"].ToString();
+                            int id = Convert.ToInt32(reader["userId"]);
+                            return new UserProfile(true, fullname, id);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.ToString());
+            }
+            finally
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+
+            return new UserProfile(false); // Return failure result
+        }
+
 
         [WebMethod]
         public DataTable GetProposal(int subid)
