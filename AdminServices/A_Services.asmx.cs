@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -153,6 +154,62 @@ namespace AdminServices
                 return "Error: " + ex.Message;
             }
         }
+
+        [WebMethod]
+        public DataTable ViewProjectTheme()
+        {
+
+            try
+            {
+                DataTable dt = new DataTable("Themes");
+                SqlCommand cmd = new SqlCommand("SELECT themeId,name FROM THEMES", connection);
+                connection.Open();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                dataAdapter.Fill(dt);
+                return dt;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+
+
+            }
+        }
+
+        [WebMethod]
+        public DataTable Ref_id_name_table()
+        {
+            try
+            {
+                DataTable dt = new DataTable("Referees");
+                SqlCommand cmd = new SqlCommand("SELECT refereesId,Username FROM Referees", connection);
+                connection.Open();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                dataAdapter.Fill(dt);
+                return dt;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+
+
+            }
+        }
+        } 
     }
-}
+
 
