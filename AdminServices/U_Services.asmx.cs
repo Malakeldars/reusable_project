@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 namespace AdminServices
 {
 
-   
+
 
     /// <summary>
     /// Summary description for U_Services
@@ -23,13 +23,14 @@ namespace AdminServices
     // [System.Web.Script.Services.ScriptService]
 
 
-    public class U_Services : System.Web.Services.WebService    
+    public class U_Services : System.Web.Services.WebService
     {
-         SqlConnection connection = new SqlConnection("Data Source=LAPTOP-77LHTH18\\SQLEXPRESS01;Initial Catalog=Reusable_project;Integrated Security=True;Encrypt=False");
+        SqlConnection connection = new SqlConnection("Data Source=DESKTOP-2OD02U8\\SQLEXPRESS;Initial Catalog=Reuse_db;Integrated Security=True");
 
 
         [WebMethod]
-        public bool CreateAccount(string username, string email, string password, string role) {
+        public bool CreateAccount(string username, string email, string password, string role)
+        {
 
             try
             {
@@ -44,13 +45,13 @@ namespace AdminServices
                 bool success = result > 0;
                 return success;
             }
-            catch 
+            catch
             {
                 return false;
             }
             finally
             {
-                if(connection.State == System.Data.ConnectionState.Open)
+                if (connection.State == System.Data.ConnectionState.Open)
                 {
                     connection.Close();
                 }
@@ -137,19 +138,19 @@ namespace AdminServices
         public bool DeleteProposal(int submissionid)
         {
             try
-            {  
-                SqlCommand cmd = new SqlCommand("DELETE FROM Submissions WHERE submissionId = @submissionid ",connection);
+            {
+                SqlCommand cmd = new SqlCommand("DELETE FROM Submissions WHERE submissionId = @submissionid ", connection);
                 cmd.Parameters.AddWithValue("@submissionid", submissionid);
                 connection.Open();
                 int result = cmd.ExecuteNonQuery();
                 bool success = result > 0;
                 return success;
             }
-            catch {  return false; }
+            catch { return false; }
             finally
             {
                 if (connection.State == System.Data.ConnectionState.Open) { connection.Close(); }
-          }
+            }
         }
         [WebMethod]
 
@@ -208,7 +209,7 @@ namespace AdminServices
         }
 
         [WebMethod]
-        public bool SubmitReport(int submissionid,string title,string report)
+        public bool SubmitReport(int submissionid, string title, string report)
         {
             try
             {
@@ -232,6 +233,40 @@ namespace AdminServices
                     connection.Close();
                 }
             }
+        }
+
+
+        [WebMethod]
+        public DataTable GetAcceptedSubmissions()
+        {
+            DataTable dt = new DataTable("Submissions");
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection("your_connection_string"))
+                {
+                    string query = "SELECT * FROM Reports WHERE status = @Status";
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@Status", "accepted");
+
+                        connection.Open();
+
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                        {
+                            adapter.Fill(dt);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine("Error: " + ex.Message);
+
+            }
+
+            return dt;
         }
 
     }
