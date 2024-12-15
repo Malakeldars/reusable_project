@@ -24,18 +24,20 @@ namespace AdminServices
 
     public class U_Services : System.Web.Services.WebService    
     {
-        SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=temp;Integrated Security=True;Encrypt=False");
+        SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable;Integrated Security=True;Encrypt=False");
 
 
         [WebMethod]
-        public bool CreateAccount( string password,string fullname,string email) {
+        public bool CreateAccount(string username, string email, string password, string role) {
 
             try
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO Users (password,email,fullname) VALUES (@password,@email,@fullname)", connection);
-                cmd.Parameters.AddWithValue("@password", password);
-                cmd.Parameters.AddWithValue("@fullname", fullname);
+                SqlCommand cmd = new SqlCommand("INSERT INTO UsersTable (username, email, password, role) VALUES (@username, @email, @password, @role)", connection);
+                cmd.Parameters.AddWithValue("@username", username);
                 cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.AddWithValue("@password", password);
+                cmd.Parameters.AddWithValue("@role", role);
+
                 connection.Open();
                 int result = cmd.ExecuteNonQuery();
                 bool success = result > 0;
@@ -52,8 +54,6 @@ namespace AdminServices
                     connection.Close();
                 }
             }
- 
-
         }
 
         [WebMethod]
@@ -61,7 +61,7 @@ namespace AdminServices
         {
             try
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT fullname, userId FROM Users WHERE password = @password AND email = @email", connection))
+                using (SqlCommand cmd = new SqlCommand("SELECT username, user_id, role FROM UsersTable WHERE password = @password AND email = @email", connection))
                 {
                     cmd.Parameters.AddWithValue("@password", password);
                     cmd.Parameters.AddWithValue("@email", email);
@@ -71,15 +71,22 @@ namespace AdminServices
                     {
                         if (reader.HasRows && reader.Read()) // Read the first row
                         {
-                            string fullname = reader["fullname"].ToString();
-                            int id = Convert.ToInt32(reader["userId"]);
-                            return new UserProfile(true, fullname, id);
+                            string username = reader["username"].ToString();
+                            int id = Convert.ToInt32(reader["user_id"]);
+                            string role = reader["role"].ToString();
+
+                            // Ensure 'role' is not null before creating the UserProfile
+                            if (role == null) throw new Exception("Role is missing from the database record.");
+
+                            return new UserProfile(true, username, id, role);
                         }
                     }
                 }
             }
             catch (Exception e)
             {
+                // Log the exception message for debugging purposes
+                Console.WriteLine("Error during login: " + e.Message);
                 throw new Exception(e.ToString());
             }
             finally
@@ -90,8 +97,9 @@ namespace AdminServices
                 }
             }
 
-            return new UserProfile(false); // Return failure result
+            return new UserProfile(false, string.Empty, 0, string.Empty);
         }
+
 
 
 

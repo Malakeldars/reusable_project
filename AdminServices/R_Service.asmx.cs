@@ -19,60 +19,60 @@ namespace AdminServices
     // [System.Web.Script.Services.ScriptService]
     public class R_Service : System.Web.Services.WebService
     {
-        SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=temp;Integrated Security=True;Encrypt=False");
+        SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=False");
 
 
-        [WebMethod]
-        public bool CreateAccount(string username, string password, string email)
-        {
-            SqlCommand cmd = new SqlCommand("INSERT INTO Referees (Username,password,email) VALUES (@username,@password,@email)", connection);
-            cmd.Parameters.AddWithValue("@username", username);
-            cmd.Parameters.AddWithValue("@password", password);
-            cmd.Parameters.AddWithValue("@email", email);
-            connection.Open();
-            int result = cmd.ExecuteNonQuery();
-            bool success = result > 0;
-            return success;
+        //[WebMethod]
+        //public bool CreateAccount(string username, string password, string email)
+        //{
+        //    SqlCommand cmd = new SqlCommand("INSERT INTO Referees (Username,password,email) VALUES (@username,@password,@email)", connection);
+        //    cmd.Parameters.AddWithValue("@username", username);
+        //    cmd.Parameters.AddWithValue("@password", password);
+        //    cmd.Parameters.AddWithValue("@email", email);
+        //    connection.Open();
+        //    int result = cmd.ExecuteNonQuery();
+        //    bool success = result > 0;
+        //    return success;
 
-        }
+        //}
 
 
-        [WebMethod]
-        public UserProfile LogIn(string email, string password)
-        {
-            try
-            {
-                using (SqlCommand cmd = new SqlCommand("SELECT fullname, refereesId FROM Referees WHERE password = @password AND email = @email", connection))
-                {
-                    cmd.Parameters.AddWithValue("@password", password);
-                    cmd.Parameters.AddWithValue("@email", email);
+        //[WebMethod]
+        //public UserProfile LogIn(string email, string password)
+        //{
+        //    try
+        //    {
+        //        using (SqlCommand cmd = new SqlCommand("SELECT fullname, refereesId FROM Referees WHERE password = @password AND email = @email", connection))
+        //        {
+        //            cmd.Parameters.AddWithValue("@password", password);
+        //            cmd.Parameters.AddWithValue("@email", email);
 
-                    connection.Open();
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        if (reader.HasRows && reader.Read()) // Read the first row
-                        {
-                            string fullname = reader["fullname"].ToString();
-                            int id = Convert.ToInt32(reader["userId"]);
-                            return new UserProfile(true, fullname, id);
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.ToString());
-            }
-            finally
-            {
-                if (connection.State == System.Data.ConnectionState.Open)
-                {
-                    connection.Close();
-                }
-            }
+        //            connection.Open();
+        //            using (SqlDataReader reader = cmd.ExecuteReader())
+        //            {
+        //                if (reader.HasRows && reader.Read()) // Read the first row
+        //                {
+        //                    string fullname = reader["fullname"].ToString();
+        //                    int id = Convert.ToInt32(reader["userId"]);
+        //                    return new UserProfile(true, fullname, id);
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new Exception(e.ToString());
+        //    }
+        //    finally
+        //    {
+        //        if (connection.State == System.Data.ConnectionState.Open)
+        //        {
+        //            connection.Close();
+        //        }
+        //    }
 
-            return new UserProfile(false); // Return failure result
-        }
+        //    return new UserProfile(false, string.Empty, 0, string.Empty);
+        //}
 
 
         [WebMethod]

@@ -19,7 +19,7 @@ namespace AdminServices
     {
 
 
-        SqlConnection connection = new SqlConnection("Data Source=DESKTOP-2OD02U8\\SQLEXPRESS;Initial Catalog=Reuse_db;Persist Security Info=True;User ID=sa;Password=DC@122180");
+        SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=False");
 
         [WebMethod]
         public bool Create_theme(String Name, String Duration, DateTime Deadline, float Budget)
@@ -105,7 +105,6 @@ namespace AdminServices
         [WebMethod]
         public bool AssignRefereeToProject(int projectId, int refereeId)
         {
-            // Validate the inputs
             if (projectId <= 0 || refereeId <= 0)
             {
                 return false;
@@ -115,29 +114,23 @@ namespace AdminServices
             {
                 using (connection)
                 {
-                    // Open the connection to the database
                     connection.Open();
 
-                    // SQL query to insert a referee assignment
                     string query = "INSERT INTO ProjectReferees (ProjectID, RefereeID) VALUES (@ProjectID, @RefereeID)";
 
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
-                        // Add parameters to the SQL query
                         cmd.Parameters.AddWithValue("@ProjectID", projectId);
                         cmd.Parameters.AddWithValue("@RefereeID", refereeId);
 
-                        // Execute the query
                         int rowsAffected = cmd.ExecuteNonQuery();
 
-                        // If one row was inserted, the assignment was successful
                         return rowsAffected > 0;
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Log the exception or handle it as necessary
                 Console.WriteLine("Error: " + ex.Message);
                 return false;
             }

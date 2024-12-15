@@ -8,15 +8,18 @@ namespace AdminServices
     public class UserProfile
     {
         public bool IsSuccess { get; set; }
-        public string FullName { get; set; }
+        public string Username { get; set; }
         public int Id { get; set; }
+        public string Role { get; set; }
 
         public UserProfile() { }
-        public UserProfile(bool isSuccess, string fullName = null, int id = 0)
+
+        public UserProfile(bool isSuccess, string userName, int id, string role)
         {
             IsSuccess = isSuccess;
-            FullName = fullName;
+            Username = userName;
             Id = id;
+            Role = role ?? throw new ArgumentNullException(nameof(role), "Role cannot be null.");
         }
     }
 }
