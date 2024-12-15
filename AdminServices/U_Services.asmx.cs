@@ -25,7 +25,7 @@ namespace AdminServices
 
     public class U_Services : System.Web.Services.WebService    
     {
-        SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable;Integrated Security=True;Encrypt=False");
+        SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False");
 
 
         [WebMethod]
@@ -151,8 +151,9 @@ namespace AdminServices
                 if (connection.State == System.Data.ConnectionState.Open) { connection.Close(); }
           }
         }
+        
+        
         [WebMethod]
-
         public bool UpdateProposal(int submissionid, string proposal)
         {
 

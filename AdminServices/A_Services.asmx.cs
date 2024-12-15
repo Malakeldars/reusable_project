@@ -20,7 +20,7 @@ namespace AdminServices
     {
 
 
-        SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=False");
+        SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False");
 
         [WebMethod]
         public bool Create_theme(String Name, String Duration, DateTime Deadline, float Budget)
@@ -109,7 +109,7 @@ namespace AdminServices
             string query = "INSERT INTO SubmissionReferees (RefereeId, SubmissionId) VALUES (@RefereeId, @SubmissionId)";
             try
             {
-                using (SqlConnection connection = new SqlConnection("Data Source=DESKTOP-2OD02U8\\SQLEXPRESS;Initial Catalog=Reuse_db;Integrated Security=True"))
+                using (SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False"))
                 {
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
@@ -134,7 +134,7 @@ namespace AdminServices
             string query = "DELETE FROM SubmissionReferees WHERE RefereeId = @RefereeId AND SubmissionId = @SubmissionId";
             try
             {
-                using (SqlConnection connection = new SqlConnection("Data Source=DESKTOP-2OD02U8\\SQLEXPRESS;Initial Catalog=Reuse_db;Integrated Security=True"))
+                using (SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False"))
                 {
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
@@ -162,7 +162,7 @@ namespace AdminServices
             try
             {
                 DataTable dt = new DataTable("Themes");
-                SqlCommand cmd = new SqlCommand("SELECT themeId,name FROM THEMES", connection);
+                SqlCommand cmd = new SqlCommand("SELECT themeId,name,duration,deadline,budget FROM THEMES", connection);
                 connection.Open();
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                 dataAdapter.Fill(dt);
@@ -205,11 +205,10 @@ namespace AdminServices
                 {
                     connection.Close();
                 }
-
-
             }
         }
         } 
     }
+
 
 
