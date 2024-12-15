@@ -20,7 +20,7 @@ namespace AdminServices
     {
 
 
-        SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=False");
+        SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable;Integrated Security=True;Encrypt=False");
 
         [WebMethod]
         public bool Create_theme(String Name, String Duration, DateTime Deadline, float Budget)
@@ -106,15 +106,15 @@ namespace AdminServices
         [WebMethod]
         public string AssignReferee(int refereeId, int submissionId)
         {
-            string query = "INSERT INTO SubmissionReferees (RefereeId, SubmissionId) VALUES (@RefereeId, @SubmissionId)";
+            string query = "INSERT INTO SubmissionReferees (user_id, SubmissionId) VALUES (@refereeId, @submissionId)";
             try
             {
                 using (SqlConnection connection = new SqlConnection("Data Source=DESKTOP-2OD02U8\\SQLEXPRESS;Initial Catalog=Reuse_db;Integrated Security=True"))
                 {
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
-                        cmd.Parameters.AddWithValue("@RefereeId", refereeId);
-                        cmd.Parameters.AddWithValue("@SubmissionId", submissionId);
+                        cmd.Parameters.AddWithValue("@refereeId", refereeId);
+                        cmd.Parameters.AddWithValue("@submissionId", submissionId);
 
                         connection.Open();
                         cmd.ExecuteNonQuery();
@@ -184,6 +184,56 @@ namespace AdminServices
         }
 
         [WebMethod]
+        public Theme GetTheme(int themeId)
+        {
+            try
+            {
+                using (connection)
+                {
+                    using (SqlCommand cmd = new SqlCommand("SELECT themeId, name, duration, budget, deadline FROM THEMES WHERE themeId = @themeId", connection))
+                    {
+                        cmd.Parameters.AddWithValue("@themeId", themeId);
+
+                        connection.Open();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.HasRows && reader.Read()) // Read the first row
+                            {
+                                Theme theme = new Theme
+                                {
+                                    ThemeId = Convert.ToInt32(reader["themeId"]),
+                                    Name = reader["name"].ToString(),
+                                    Duration = reader["duration"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["duration"]),
+                                    Budget = reader["budget"] == DBNull.Value ? (double?)null : Convert.ToDouble(reader["budget"]),
+                                    Deadline = reader["deadline"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(reader["deadline"])
+                                };
+
+                                return theme;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log or handle exception as needed
+                Console.WriteLine("Error fetching theme: " + ex.Message);
+                return null;
+            }
+            finally
+            {
+                // Ensure the connection is closed
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+
+            return null; // Return null if no rows are found
+        }
+
+
+        [WebMethod]
         public DataTable Ref_id_name_table()
         {
             try
@@ -209,7 +259,16 @@ namespace AdminServices
 
             }
         }
-        } 
+        }
+
+    public class Theme
+    {
+        public int ThemeId { get; set; }
+        public string Name { get; set; }
+        public int? Duration { get; set; }  // Can be nullable or string type
+        public double? Budget { get; set; }  // Nullable decimal
+        public DateTime? Deadline { get; set; }  // Nullable DateTime
     }
+}
 
 
