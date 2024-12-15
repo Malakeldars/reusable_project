@@ -238,8 +238,8 @@ namespace AdminServices
         {
             try
             {
-                DataTable dt = new DataTable("Referees");
-                SqlCommand cmd = new SqlCommand("SELECT refereesId,Username FROM Referees", connection);
+                DataTable dt = new DataTable("UsersTable");
+                SqlCommand cmd = new SqlCommand("SELECT user_id,username FROM UsersTable WHERE role=referee", connection);
                 connection.Open();
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                 dataAdapter.Fill(dt);
@@ -291,7 +291,7 @@ namespace AdminServices
     
 
 }
-        }
+        
 
     public class Theme
     {
@@ -301,6 +301,6 @@ namespace AdminServices
         public double? Budget { get; set; }  // Nullable decimal
         public DateTime? Deadline { get; set; }  // Nullable DateTime
     }
-}
+
 
 
