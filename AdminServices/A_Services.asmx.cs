@@ -259,6 +259,38 @@ namespace AdminServices
 
             }
         }
+
+        [WebMethod]
+        public DataTable GetThemeDetails(int themeID)
+        {
+            try
+            {
+                DataTable dt = new DataTable("Themes");
+                SqlCommand cmd = new SqlCommand("SELECT name,duration,budget,deadline FROM THEMES where themeId = @themeID", connection);
+                cmd.Parameters.AddWithValue("@ThemeID", themeID);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                connection.Open();
+                dataAdapter.Fill(dt);
+                return dt;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+
+
+            }
+        }
+    }
+    
+
+}
         }
 
     public class Theme
