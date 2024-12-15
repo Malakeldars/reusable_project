@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -36,7 +37,7 @@ namespace AdminServices
 
                 bool success = result > 0;
                 return success;
-        }
+            }
             catch
             {
                 return false;
@@ -47,7 +48,7 @@ namespace AdminServices
                 {
                     connection.Close();
                 }
-}
+            }
 
         }
 
@@ -103,38 +104,112 @@ namespace AdminServices
         }
 
         [WebMethod]
-        public bool AssignRefereeToProject(int projectId, int refereeId)
+        public string AssignReferee(int refereeId, int submissionId)
         {
-            if (projectId <= 0 || refereeId <= 0)
-            {
-                return false;
-            }
-
+            string query = "INSERT INTO SubmissionReferees (RefereeId, SubmissionId) VALUES (@RefereeId, @SubmissionId)";
             try
             {
-                using (connection)
+                using (SqlConnection connection = new SqlConnection("Data Source=DESKTOP-2OD02U8\\SQLEXPRESS;Initial Catalog=Reuse_db;Integrated Security=True"))
                 {
-                    connection.Open();
-
-                    string query = "INSERT INTO ProjectReferees (ProjectID, RefereeID) VALUES (@ProjectID, @RefereeID)";
-
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
-                        cmd.Parameters.AddWithValue("@ProjectID", projectId);
-                        cmd.Parameters.AddWithValue("@RefereeID", refereeId);
+                        cmd.Parameters.AddWithValue("@RefereeId", refereeId);
+                        cmd.Parameters.AddWithValue("@SubmissionId", submissionId);
 
+                        connection.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                return "Referee assigned successfully.";
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
+
+        [WebMethod]
+        public string UnassignReferee(int refereeId, int submissionId)
+        {
+            string query = "DELETE FROM SubmissionReferees WHERE RefereeId = @RefereeId AND SubmissionId = @SubmissionId";
+            try
+            {
+                using (SqlConnection connection = new SqlConnection("Data Source=DESKTOP-2OD02U8\\SQLEXPRESS;Initial Catalog=Reuse_db;Integrated Security=True"))
+                {
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@RefereeId", refereeId);
+                        cmd.Parameters.AddWithValue("@SubmissionId", submissionId);
+
+                        connection.Open();
                         int rowsAffected = cmd.ExecuteNonQuery();
-
-                        return rowsAffected > 0;
+                        return rowsAffected > 0
+                            ? "Referee unassigned successfully."
+                            : "No matching record found to unassign.";
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error: " + ex.Message);
-                return false;
+                return "Error: " + ex.Message;
             }
         }
+
+        [WebMethod]
+        public DataTable ViewProjectTheme()
+        {
+
+            try
+            {
+                DataTable dt = new DataTable("Themes");
+                SqlCommand cmd = new SqlCommand("SELECT themeId,name FROM THEMES", connection);
+                connection.Open();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                dataAdapter.Fill(dt);
+                return dt;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+
+
+            }
+        }
+
+        [WebMethod]
+        public DataTable Ref_id_name_table()
+        {
+            try
+            {
+                DataTable dt = new DataTable("Referees");
+                SqlCommand cmd = new SqlCommand("SELECT refereesId,Username FROM Referees", connection);
+                connection.Open();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                dataAdapter.Fill(dt);
+                return dt;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+
+
+            }
+        }
+        } 
     }
-}
+
 
