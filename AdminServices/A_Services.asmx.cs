@@ -236,17 +236,25 @@ namespace AdminServices
         [WebMethod]
         public DataTable Ref_id_name_table()
         {
+            DataTable dt = new DataTable("UsersTable");
+
             try
             {
-                DataTable dt = new DataTable("UsersTable");
-                SqlCommand cmd = new SqlCommand("SELECT user_id,username FROM UsersTable WHERE role=referee", connection);
-                connection.Open();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
-                dataAdapter.Fill(dt);
-                return dt;
+                string query = "SELECT user_id, username FROM UsersTable WHERE role = @role";
+
+                using (SqlCommand cmd = new SqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@role", "referee");
+                    connection.Open();
+                    using (SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd))
+                    {
+                        dataAdapter.Fill(dt);
+                    }
+                }
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine("Error: " + ex.Message);
                 return null;
             }
             finally
@@ -255,10 +263,11 @@ namespace AdminServices
                 {
                     connection.Close();
                 }
-
-
             }
+
+            return dt;
         }
+
 
         [WebMethod]
         public DataTable GetThemeDetails(int themeID)
