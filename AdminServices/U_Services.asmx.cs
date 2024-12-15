@@ -237,27 +237,27 @@ namespace AdminServices
 
 
         [WebMethod]
-        public DataTable GetAcceptedSubmissions()
+        public DataTable GetAcceptedSubmissions(int user_id)
         {
             DataTable dt = new DataTable("Submissions");
 
             try
             {
-                using (SqlConnection connection = new SqlConnection("your_connection_string"))
+               
+                
+                string query = "SELECT * FROM Submissions WHERE status = @Status and userid = @user_id";
+                using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
-                    string query = "SELECT * FROM Reports WHERE status = @Status";
-                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    cmd.Parameters.AddWithValue("@Status", "accepted");
+                    cmd.Parameters.AddWithValue("@user_id", user_id);
+                    connection.Open();
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
                     {
-                        cmd.Parameters.AddWithValue("@Status", "accepted");
-
-                        connection.Open();
-
-                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
-                        {
-                            adapter.Fill(dt);
-                        }
+                        adapter.Fill(dt);
                     }
                 }
+                
             }
             catch (Exception ex)
             {
@@ -269,6 +269,58 @@ namespace AdminServices
             return dt;
         }
 
+        [WebMethod]
+        public DataTable GetSubBeforeDeadline()
+        {
+            DataTable dt = new DataTable("Submissions");
+
+            try
+            {
+
+                string query = @"
+            SELECT 
+                s.submissionId, 
+                s.userid, 
+                s.proposal, 
+                s.status, 
+                s.title 
+            FROM 
+                submissions s
+            INNER JOIN 
+                themes t 
+            ON 
+                s.themeid = t.themeid
+            WHERE 
+                t.deadline > GETDATE()";
+                // Compare deadline with current system date and time
+
+                SqlCommand cmd = new SqlCommand(query, connection);
+
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dt);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close(); 
+                }
+            }
+
+            return dt;
+        }
+
     }
 }
+
 
