@@ -5,6 +5,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
+using System.Web.UI.WebControls;
+using System.Xml.Linq;
 
 namespace AdminServices
 {
@@ -210,34 +212,99 @@ namespace AdminServices
             }
         }
 
-        [WebMethod]
-        public DataTable getAvailbaleSubmisssions()
-        {
-            try
-            {
-                DataTable dt = new DataTable("Submissions");
-                SqlCommand cmd = new SqlCommand("SELECT submissionId,userid,themes.name AS theme_name,title,status  FROM     submissions JOIN   themes ON  submissions.theme_id = themes.id;", connection);
-                connection.Open();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
-                dataAdapter.Fill(dt);
-                return dt;
-            }
-            catch
-            {
-                return null;
-            }
-            finally
-            {
-                if (connection.State == System.Data.ConnectionState.Open)
-                {
-                    connection.Close();
-                }
+        //[WebMethod]
+        //public DataTable getAvailbaleSubmisssions()
+        //{
+        //    try
+        //    {
+        //        DataTable dt = new DataTable("Submissions");
+        //        SqlCommand cmd = new SqlCommand("SELECT submissionId,userid,themes.name AS theme_name,title,status  FROM     submissions JOIN   themes ON  submissions.theme_id = themes.id;", connection);
+        //        connection.Open();
+        //        SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+        //        dataAdapter.Fill(dt);
+        //        return dt;
+        //    }
+        //    catch
+        //    {
+        //        return null;
+        //    }
+        //    finally
+        //    {
+        //        if (connection.State == System.Data.ConnectionState.Open)
+        //        {
+        //            connection.Close();
+        //        }
 
+
+        //    }
+        //}
+
+        [WebMethod]
+        public bool SendFinalReport(string title, string content, DateTime uploadDate, int userID)
+        {
+            // Connection string to the database
+            string connectionString = "Data Source=LAPTOP-77LHTH18\\SQLEXPRESS01;Initial Catalog=Reusable_project;Integrated Security=True;Encrypt=False";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open(); 
+                    string role = string.Empty;
+                    using (SqlCommand getRoleCmd = new SqlCommand("SELECT role FROM UsersTable WHERE user_id = @userID", conn))
+                    {
+                        getRoleCmd.Parameters.AddWithValue("@userID", userID);
+
+                        object roleResult = getRoleCmd.ExecuteScalar(); 
+                        if (roleResult != null)
+                        {
+                            role = roleResult.ToString();
+                        }
+                        else
+                        {
+                            // Return false if the user does not exist or role is null
+                            return false;
+                        }
+                    }
+
+                    // Check if the role is "referee"
+                    if (role.Equals("referee", StringComparison.OrdinalIgnoreCase))
+                    {
+                        // Insert the report into the Reports table
+                        using (SqlCommand insertReportCmd = new SqlCommand("INSERT INTO Reports (title, reportcontent, uploaddate, userID) VALUES (@title, @content, @uploaddate, @userID)", conn))
+                        {
+                            insertReportCmd.Parameters.AddWithValue("@title", title);
+                            insertReportCmd.Parameters.AddWithValue("@content", content);
+                            insertReportCmd.Parameters.AddWithValue("@uploaddate", uploadDate);
+                            insertReportCmd.Parameters.AddWithValue("@userID", userID);
+
+                            int result = insertReportCmd.ExecuteNonQuery(); 
+                            return result > 0;
+                        }
+                    }
+                    else
+                    {
+                       
+                        return false;
+                    }
+                }
+                catch
+                {
+                   
+                    return false;
+                }
+                finally
+                {
+                    if (conn.State == ConnectionState.Open) { 
+                      conn.Close();
+                    }
+                }
 
             }
         }
 
-        } 
+
     }
+}
 
 
