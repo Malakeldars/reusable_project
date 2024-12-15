@@ -25,7 +25,7 @@ namespace AdminServices
 
     public class U_Services : System.Web.Services.WebService
     {
-        SqlConnection connection = new SqlConnection("Data Source=DESKTOP-2OD02U8\\SQLEXPRESS;Initial Catalog=Reuse_db;Integrated Security=True");
+        SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable;Integrated Security=True;Encrypt=False");
 
 
         [WebMethod]
