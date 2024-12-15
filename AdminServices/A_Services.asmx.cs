@@ -395,4 +395,16 @@ namespace AdminServices
 }
 
 
+public class Theme
+{
+    public int ThemeId { get; set; }
+    public string Name { get; set; }
+    public int? Duration { get; set; }  // Can be nullable or string type
+    public double? Budget { get; set; }  // Nullable decimal
+    public DateTime? Deadline { get; set; }  // Nullable DateTime
+}
+
+
+
+
 
