@@ -44,7 +44,7 @@ namespace AdminServices
                 bool success = result > 0;
                 return success;
             }
-            catch
+            catch 
             {
                 return false;
             }

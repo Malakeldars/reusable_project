@@ -108,15 +108,15 @@ namespace AdminServices
         [WebMethod]
         public string AssignReferee(int refereeId, int submissionId)
         {
-            string query = "INSERT INTO SubmissionReferees (RefereeId, SubmissionId) VALUES (@RefereeId, @SubmissionId)";
+            string query = "INSERT INTO SubmissionReferees (user_id, SubmissionId) VALUES (@refereeId, @submissionId)";
             try
             {
                 using (SqlConnection connection = new SqlConnection("Data Source=DESKTOP-2OD02U8\\SQLEXPRESS;Initial Catalog=Reuse_db;Integrated Security=True"))
                 {
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
-                        cmd.Parameters.AddWithValue("@RefereeId", refereeId);
-                        cmd.Parameters.AddWithValue("@SubmissionId", submissionId);
+                        cmd.Parameters.AddWithValue("@refereeId", refereeId);
+                        cmd.Parameters.AddWithValue("@submissionId", submissionId);
 
                         connection.Open();
                         cmd.ExecuteNonQuery();
@@ -133,7 +133,7 @@ namespace AdminServices
         [WebMethod]
         public string UnassignReferee(int refereeId, int submissionId)
         {
-            string query = "DELETE FROM SubmissionReferees WHERE RefereeId = @RefereeId AND SubmissionId = @SubmissionId";
+            string query = "DELETE FROM SubmissionReferees WHERE user_id = @RefereeId AND SubmissionId = @SubmissionId";
             try
             {
                 using (SqlConnection connection = new SqlConnection("Data Source=DESKTOP-2OD02U8\\SQLEXPRESS;Initial Catalog=Reuse_db;Integrated Security=True"))
@@ -186,14 +186,101 @@ namespace AdminServices
         }
 
         [WebMethod]
-        public DataTable Ref_id_name_table()
+        public Theme GetTheme(int themeId)
         {
             try
             {
-                DataTable dt = new DataTable("Referees");
-                SqlCommand cmd = new SqlCommand("SELECT refereesId,Username FROM Referees", connection);
-                connection.Open();
+                using (connection)
+                {
+                    using (SqlCommand cmd = new SqlCommand("SELECT themeId, name, duration, budget, deadline FROM THEMES WHERE themeId = @themeId", connection))
+                    {
+                        cmd.Parameters.AddWithValue("@themeId", themeId);
+
+                        connection.Open();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.HasRows && reader.Read()) // Read the first row
+                            {
+                                Theme theme = new Theme
+                                {
+                                    ThemeId = Convert.ToInt32(reader["themeId"]),
+                                    Name = reader["name"].ToString(),
+                                    Duration = reader["duration"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["duration"]),
+                                    Budget = reader["budget"] == DBNull.Value ? (double?)null : Convert.ToDouble(reader["budget"]),
+                                    Deadline = reader["deadline"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(reader["deadline"])
+                                };
+
+                                return theme;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log or handle exception as needed
+                Console.WriteLine("Error fetching theme: " + ex.Message);
+                return null;
+            }
+            finally
+            {
+                // Ensure the connection is closed
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+
+            return null; // Return null if no rows are found
+        }
+
+
+        [WebMethod]
+        public DataTable Ref_id_name_table()
+        {
+            DataTable dt = new DataTable("UsersTable");
+
+            try
+            {
+                string query = "SELECT user_id, username FROM UsersTable WHERE role = @role";
+
+                using (SqlCommand cmd = new SqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@role", "referee");
+                    connection.Open();
+                    using (SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd))
+                    {
+                        dataAdapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                return null;
+            }
+            finally
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+
+            return dt;
+        }
+
+
+        [WebMethod]
+        public DataTable GetThemeDetails(int themeID)
+        {
+            try
+            {
+                DataTable dt = new DataTable("Themes");
+                SqlCommand cmd = new SqlCommand("SELECT name,duration,budget,deadline FROM THEMES where themeId = @themeID", connection);
+                cmd.Parameters.AddWithValue("@ThemeID", themeID);
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                connection.Open();
                 dataAdapter.Fill(dt);
                 return dt;
             }
@@ -306,5 +393,6 @@ namespace AdminServices
 
     }
 }
+
 
 
