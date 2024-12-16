@@ -25,7 +25,7 @@ namespace AdminServices
 
     public class U_Services : System.Web.Services.WebService
     {
-        SqlConnection connection = new SqlConnection("Data Source=LAPTOP-77LHTH18\\SQLEXPRESS01;Initial Catalog=Reusable_project;Integrated Security=True;Encrypt=False");
+        SqlConnection connection = new SqlConnection("Data Source =.\\sqlexpress; Initial Catalog = Reusable; Integrated Security = True; Encrypt=False");
 
 
         [WebMethod]
@@ -199,7 +199,7 @@ namespace AdminServices
             }
         }
 
-
+        [WebMethod]
 
         public bool SubmitProposal(int userid, int themeid, string title, string proposal)
         {
@@ -234,7 +234,7 @@ namespace AdminServices
             try
             {
            
-                SqlCommand cmd = new SqlCommand("INSERT INTO Reports (userID, SubmissionID,title,reportcontent) VALUES (@userID,@submissionid, @title, @report) ", connection);
+                SqlCommand cmd = new SqlCommand("INSERT INTO Reports (userID, SubmissionID,title,reportcontent,uploaddate) VALUES (@userID,@submissionid, @title, @report, uploaddate) ", connection);
                 cmd.Parameters.AddWithValue("@userID", userID);
                 cmd.Parameters.AddWithValue("@submissionid", submissionid);
                 cmd.Parameters.AddWithValue("@title", title);
