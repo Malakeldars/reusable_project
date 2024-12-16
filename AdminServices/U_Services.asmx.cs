@@ -229,12 +229,13 @@ namespace AdminServices
         }
 
         [WebMethod]
-        public bool SubmitReport(int submissionid, string title, string report, DateTime uploaddate)
+        public bool SubmitReport(int userID, int submissionid, string title, string report, DateTime uploaddate)
         {
             try
             {
            
-                SqlCommand cmd = new SqlCommand("INSERT INTO Reports (SubmissionID,title,reportcontent) VALUES (@submissionid, @title, @report) ", connection);
+                SqlCommand cmd = new SqlCommand("INSERT INTO Reports (userID, SubmissionID,title,reportcontent) VALUES (@userID,@submissionid, @title, @report) ", connection);
+                cmd.Parameters.AddWithValue("@userID", userID);
                 cmd.Parameters.AddWithValue("@submissionid", submissionid);
                 cmd.Parameters.AddWithValue("@title", title);
                 cmd.Parameters.AddWithValue("@report", report);
@@ -299,7 +300,7 @@ namespace AdminServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection("Data Source=LAPTOP-77LHTH18\\SQLEXPRESS01;Initial Catalog=Reusable_project;Integrated Security=True;Encrypt=False"))
+                using (SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable;Integrated Security=True;Encrypt=False"))
                 {
                     connection.Open();
 
