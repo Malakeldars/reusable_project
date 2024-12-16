@@ -276,6 +276,36 @@ namespace AdminServices
 
             return ReportslList; // Return the list of proposals
         }
+
+
+        [WebMethod]
+
+        public bool UpdateProposal(int submissionid, string status)
+        {
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand("UPDATE Submissions SET status = @status WHERE submissionId = @submissionid", connection);
+                cmd.Parameters.AddWithValue("@submissionid", submissionid);
+                cmd.Parameters.AddWithValue("@status", status);
+                connection.Open();
+                int result = cmd.ExecuteNonQuery();
+                bool success = result > 0;
+                return success;
+
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+        }
     }
 }
 

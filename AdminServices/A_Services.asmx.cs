@@ -235,6 +235,7 @@ namespace AdminServices
         }
 
 
+
         [WebMethod]
         public DataTable Ref_id_name_table()
         {
@@ -299,32 +300,32 @@ namespace AdminServices
             }
         }
 
-        //[WebMethod]
-        //public DataTable getAvailbaleSubmisssions()
-        //{
-        //    try
-        //    {
-        //        DataTable dt = new DataTable("Submissions");
-        //        SqlCommand cmd = new SqlCommand("SELECT submissionId,userid,themes.name AS theme_name,title,status  FROM     submissions JOIN   themes ON  submissions.theme_id = themes.id;", connection);
-        //        connection.Open();
-        //        SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
-        //        dataAdapter.Fill(dt);
-        //        return dt;
-        //    }
-        //    catch
-        //    {
-        //        return null;
-        //    }
-        //    finally
-        //    {
-        //        if (connection.State == System.Data.ConnectionState.Open)
-        //        {
-        //            connection.Close();
-        //        }
+        [WebMethod]
+        public DataTable getAvailbaleSubmisssions()
+        {
+            try
+            {
+                DataTable dt = new DataTable("Submissions");
+                SqlCommand cmd = new SqlCommand("SELECT submissionId,userid,themes.name AS theme_name,title,status  FROM     submissions JOIN   themes ON  submissions.theme_id = themes.id;", connection);
+                connection.Open();
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                dataAdapter.Fill(dt);
+                return dt;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
 
 
-        //    }
-        //}
+            }
+        }
 
         [WebMethod]
         public bool SendFinalReport(string title, string content, DateTime uploadDate, int userID)
