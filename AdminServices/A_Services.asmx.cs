@@ -164,7 +164,7 @@ namespace AdminServices
             try
             {
                 DataTable dt = new DataTable("Themes");
-                SqlCommand cmd = new SqlCommand("SELECT themeId,name FROM THEMES", connection);
+                SqlCommand cmd = new SqlCommand("SELECT themeId,name,duration,deadline,budget FROM THEMES", connection);
                 connection.Open();
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                 dataAdapter.Fill(dt);
@@ -295,43 +295,19 @@ namespace AdminServices
                 {
                     connection.Close();
                 }
-
-
             }
         }
 
-        [WebMethod]
-        public DataTable getAvailbaleSubmisssions()
-        {
-            try
-            {
-                DataTable dt = new DataTable("Submissions");
-                SqlCommand cmd = new SqlCommand("SELECT submissionId,userid,themes.name AS theme_name,title,status  FROM     submissions JOIN   themes ON  submissions.theme_id = themes.id;", connection);
-                connection.Open();
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
-                dataAdapter.Fill(dt);
-                return dt;
-            }
-            catch
-            {
-                return null;
-            }
-            finally
-            {
-                if (connection.State == System.Data.ConnectionState.Open)
-                {
-                    connection.Close();
-                }
+      
 
-
-            }
-        }
+        //    }
+        //}
 
         [WebMethod]
         public bool SendFinalReport(string title, string content, DateTime uploadDate, int userID)
         {
             // Connection string to the database
-            string connectionString = "Data Source=LAPTOP-77LHTH18\\SQLEXPRESS01;Initial Catalog=Reusable_project;Integrated Security=True;Encrypt=False";
+            string connectionString = "Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -367,12 +343,11 @@ namespace AdminServices
                             insertReportCmd.Parameters.AddWithValue("@userID", userID);
 
                             int result = insertReportCmd.ExecuteNonQuery(); 
-                            return result > 0;
+                            return true;
                         }
                     }
                     else
                     {
-                       
                         return false;
                     }
                 }
@@ -404,6 +379,7 @@ public class Theme
     public double? Budget { get; set; }  // Nullable decimal
     public DateTime? Deadline { get; set; }  // Nullable DateTime
 }
+
 
 
 
