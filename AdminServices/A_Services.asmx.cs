@@ -23,7 +23,7 @@ namespace AdminServices
     {
 
 
-         SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False");
+         SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable;Integrated Security=True;Encrypt=False");
 
         [WebMethod]
         public bool Create_theme(String Name, String Duration, DateTime Deadline, float Budget)
@@ -85,23 +85,23 @@ namespace AdminServices
         [WebMethod]
         public bool DeleteTheme(int Theme_ID)
         {
-            try
+            //try
             {
-                SqlCommand cmd = new SqlCommand("DELETE  FROM Themes WHERE themeId = @Theme_ID", connection);
+                SqlCommand cmd = new SqlCommand("DELETE FROM Themes WHERE themeId = @Theme_ID", connection);
                 cmd.Parameters.AddWithValue("@Theme_ID", Theme_ID);
                 connection.Open();
                 int result = cmd.ExecuteNonQuery();
                 bool success = result > 0;
                 return success;
             }
-            catch { return false; }
-            finally
-            {
-                if (connection.State == System.Data.ConnectionState.Open)
-                {
-                    connection.Close();
-                }
-            }
+            //catch { return false; }
+            //finally
+            //{
+            //    if (connection.State == System.Data.ConnectionState.Open)
+            //    {
+            //        connection.Close();
+            //    }
+            //}
 
 
         }
@@ -112,7 +112,7 @@ namespace AdminServices
             string query = "INSERT INTO SubmissionReferees (user_id, SubmissionId) VALUES (@refereeId, @submissionId)";
             try
             {
-                using (SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False"))
+                using (SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable;Integrated Security=True;Encrypt=False"))
                 {
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
@@ -137,7 +137,7 @@ namespace AdminServices
             string query = "DELETE FROM SubmissionReferees WHERE user_id = @RefereeId AND SubmissionId = @SubmissionId";
             try
             {
-                using (SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False"))
+                using (SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable;Integrated Security=True;Encrypt=False"))
                 {
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
@@ -305,7 +305,7 @@ namespace AdminServices
         [WebMethod]
         public bool SendFinalReport(string title, string content, DateTime uploadDate, int userID)
         {
-            string connectionString = "Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False";
+            string connectionString = "Data Source=.\\sqlexpress;Initial Catalog=Reusable;Integrated Security=True;Encrypt=False";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {

@@ -19,7 +19,7 @@ namespace AdminServices
     // [System.Web.Script.Services.ScriptService]
     public class R_Service : System.Web.Services.WebService
     {
-         SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False");
+        SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable;Integrated Security=True;Encrypt=False");
 
 
         //[WebMethod]
@@ -73,7 +73,34 @@ namespace AdminServices
 
         //    return new UserProfile(false, string.Empty, 0, string.Empty);
         //}
+        [WebMethod]
 
+        public bool UpdateProposal(int submissionid, string status)
+        {
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand("UPDATE Submissions SET status = @status WHERE submissionId = @submissionid", connection);
+                cmd.Parameters.AddWithValue("@submissionid", submissionid);
+                cmd.Parameters.AddWithValue("@status", status);
+                connection.Open();
+                int result = cmd.ExecuteNonQuery();
+                bool success = result > 0;
+                return success;
+
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+        }
         [WebMethod]
         public List<Proposals> viewAllproposals()
         {
@@ -326,24 +353,24 @@ namespace AdminServices
                         {
                             while (reader.Read()) // Loop through all rows in the result set
                             {
-                               Reports report = new Reports
+                                Reports report = new Reports
                                 {
-                                   ReportId = Convert.ToInt32(reader["ReportId"]),
+                                    ReportId = Convert.ToInt32(reader["ReportId"]),
                                     title = reader["title"].ToString(),
                                     SubmissionID = Convert.ToInt32(reader["SubmissionID"]),
-                                   // role = reader["role"].ToString(),
-                                   // themename = reader["name"].ToString()
-                                   //    UserID = Convert.ToInt32(reader["userid"]),
-                                   //    themeid = Convert.ToInt32(reader["themeid"]),
-                                   //};
-                               };
+                                    // role = reader["role"].ToString(),
+                                    // themename = reader["name"].ToString()
+                                    //    UserID = Convert.ToInt32(reader["userid"]),
+                                    //    themeid = Convert.ToInt32(reader["themeid"]),
+                                    //};
+                                };
 
-                              ReportslList.Add(report); // Add the proposal to the list
+                                ReportslList.Add(report); // Add the proposal to the list
                             }
                         }
                     }
                 }
-        }
+            }
             catch (Exception ex)
             {
                 // Log or handle exception as needed
@@ -363,6 +390,9 @@ namespace AdminServices
         }
     }
 }
+
+
+
 
 public class Proposals
 {
