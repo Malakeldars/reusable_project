@@ -235,6 +235,7 @@ namespace AdminServices
         }
 
 
+
         [WebMethod]
         public DataTable Ref_id_name_table()
         {
@@ -298,6 +299,9 @@ namespace AdminServices
         }
 
       
+
+        //    }
+        //}
 
         [WebMethod]
         public bool SendFinalReport(string title, string content, DateTime uploadDate, int userID)
