@@ -160,28 +160,64 @@ namespace AdminServices
             }
         }
         [WebMethod]
-        public DataTable GetRefReports(int refereeId)
+        public List<Reports> GetRefReports(int refereeId)
         {
+            List<Reports> reportsList = new List<Reports>(); // Initialize list to hold reports
+
             try
             {
-                DataTable dt = new DataTable("SubmissionReferees");
-                SqlCommand cmd = new SqlCommand("SELECT SubmissionId FROM SubmissionReferees WHERE user_id = @refereeId", connection);
-                cmd.Parameters.AddWithValue("@refereeId", refereeId);
-                connection.Open();
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                adapter.Fill(dt);
-                return dt;
+                using (connection)
+                {
+                    string query = @"
+                SELECT 
+                    r.ReportId, 
+                    r.title,
+                    sr.SubmissionId
+                FROM 
+                    Reports r
+                JOIN 
+                    SubmissionReferees sr ON sr.SubmissionId = r.SubmissionId
+                WHERE 
+                    sr.user_id = @refereeId
+            ";
+
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@refereeId", refereeId);
+                        connection.Open();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Reports report = new Reports
+                                {
+                                    ReportId = Convert.ToInt32(reader["ReportId"]),
+                                    title = reader["title"].ToString(),
+                                    // Optionally, include SubmissionId here if needed
+                                };
+
+                                reportsList.Add(report);
+                            }
+                        }
+                    }
+                }
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine("Error fetching reports: " + ex.Message);
                 return null;
             }
             finally
             {
-                if (connection.State == ConnectionState.Open)
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
                     connection.Close();
+                }
             }
+
+            return reportsList;
         }
+
 
         [WebMethod]
         public DataTable GetProposal(int subid)
@@ -274,11 +310,12 @@ namespace AdminServices
                 {
                     string query = @"
                 SELECT 
-                    ReportId, 
+                    ReportId,
+                    SubmissionID,
                     title
-                     
                 FROM 
-                   Reports ";
+                   Reports 
+                ";
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
                         connection.Open();
@@ -290,12 +327,13 @@ namespace AdminServices
                                 {
                                    ReportId = Convert.ToInt32(reader["ReportId"]),
                                     title = reader["title"].ToString(),
+                                    SubmissionID = Convert.ToInt32(reader["SubmissionID"]),
                                    // role = reader["role"].ToString(),
                                    // themename = reader["name"].ToString()
-                                    //    UserID = Convert.ToInt32(reader["userid"]),
-                                    //    themeid = Convert.ToInt32(reader["themeid"]),
-                                    //};
-                                };
+                                   //    UserID = Convert.ToInt32(reader["userid"]),
+                                   //    themeid = Convert.ToInt32(reader["themeid"]),
+                                   //};
+                               };
 
                               ReportslList.Add(report); // Add the proposal to the list
                             }
@@ -339,7 +377,7 @@ public class Reports
 {
     public int ReportId { get; set; }
    // public int UserID { get; set; }
-   // public int Submissionid { get; set; }  // Can be nullable or string type
+    public int SubmissionID { get; set; } 
     //public string role { get; set; }
 
     public string title { get; set; }
