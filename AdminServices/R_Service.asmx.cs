@@ -22,20 +22,134 @@ namespace AdminServices
          SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False");
 
 
-        
+        //[WebMethod]
+        //public bool CreateAccount(string username, string password, string email)
+        //{
+        //    SqlCommand cmd = new SqlCommand("INSERT INTO Referees (Username,password,email) VALUES (@username,@password,@email)", connection);
+        //    cmd.Parameters.AddWithValue("@username", username);
+        //    cmd.Parameters.AddWithValue("@password", password);
+        //    cmd.Parameters.AddWithValue("@email", email);
+        //    connection.Open();
+        //    int result = cmd.ExecuteNonQuery();
+        //    bool success = result > 0;
+        //    return success;
+
+        //}
+
+
+        //[WebMethod]
+        //public UserProfile LogIn(string email, string password)
+        //{
+        //    try
+        //    {
+        //        using (SqlCommand cmd = new SqlCommand("SELECT fullname, refereesId FROM Referees WHERE password = @password AND email = @email", connection))
+        //        {
+        //            cmd.Parameters.AddWithValue("@password", password);
+        //            cmd.Parameters.AddWithValue("@email", email);
+
+        //            connection.Open();
+        //            using (SqlDataReader reader = cmd.ExecuteReader())
+        //            {
+        //                if (reader.HasRows && reader.Read()) // Read the first row
+        //                {
+        //                    string fullname = reader["fullname"].ToString();
+        //                    int id = Convert.ToInt32(reader["userId"]);
+        //                    return new UserProfile(true, fullname, id);
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new Exception(e.ToString());
+        //    }
+        //    finally
+        //    {
+        //        if (connection.State == System.Data.ConnectionState.Open)
+        //        {
+        //            connection.Close();
+        //        }
+        //    }
+
+        //    return new UserProfile(false, string.Empty, 0, string.Empty);
+        //}
+
+        [WebMethod]
+        public List<Proposals> viewAllproposals()
+        {
+            List<Proposals> proposalList = new List<Proposals>(); // Initialize a list to hold multiple proposals
+
+            try
+            {
+                using (connection)
+                {
+                    string query = @"
+                SELECT 
+                    s.submissionId, 
+                    s.title, 
+                    t.name, 
+                    s.status 
+                FROM 
+                    Submissions s
+                INNER JOIN 
+                    Themes t 
+                ON 
+                    s.themeId = t.themeId";
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        connection.Open();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read()) // Loop through all rows in the result set
+                            {
+                                Proposals proposal = new Proposals
+                                {
+                                    submissionId = Convert.ToInt32(reader["submissionId"]),
+                                    title = reader["title"].ToString(),
+                                    status = reader["status"].ToString(),
+                                    themename = reader["name"].ToString()
+                                    //    UserID = Convert.ToInt32(reader["userid"]),
+                                    //    themeid = Convert.ToInt32(reader["themeid"]),
+                                    //};
+                                };
+
+                                proposalList.Add(proposal); // Add the proposal to the list
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log or handle exception as needed
+                Console.WriteLine("Error fetching proposals: " + ex.Message);
+                return null; // Return null if an error occurs
+            }
+            finally
+            {
+                // Ensure the connection is closed
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+
+            return proposalList; // Return the list of proposals
+        }
+
 
         [WebMethod]
         public DataTable GetProposal(int subid)
         {
             try
             {
-               DataTable dt = new DataTable("Submissions");
-               SqlCommand cmd = new SqlCommand("SELECT * FROM Submissions WHERE submissionId = @subid", connection);
-               cmd.Parameters.AddWithValue("@submissionId", subid);
-               connection.Open();
-               SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-               adapter.Fill(dt);
-               return dt;
+                DataTable dt = new DataTable("Submissions");
+                SqlCommand cmd = new SqlCommand("SELECT * FROM Submissions WHERE submissionId = @subid", connection);
+                cmd.Parameters.AddWithValue("@subid", subid);
+                connection.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dt);
+                return dt;
             }
             catch
             {
@@ -102,5 +216,92 @@ namespace AdminServices
                     connection.Close();
             }
         }
+
+
+
+        [WebMethod]
+        public List<Reports> viewAllreports()
+        {
+            List<Reports> ReportslList = new List<Reports>(); // Initialize a list to hold multiple proposals
+
+            try
+            {
+                using (connection)
+                {
+                    string query = @"
+                SELECT 
+                    ReportId, 
+                    title
+                     
+                FROM 
+                   Reports ";
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        connection.Open();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read()) // Loop through all rows in the result set
+                            {
+                               Reports report = new Reports
+                                {
+                                   ReportId = Convert.ToInt32(reader["ReportId"]),
+                                    title = reader["title"].ToString(),
+                                   // role = reader["role"].ToString(),
+                                   // themename = reader["name"].ToString()
+                                    //    UserID = Convert.ToInt32(reader["userid"]),
+                                    //    themeid = Convert.ToInt32(reader["themeid"]),
+                                    //};
+                                };
+
+                              ReportslList.Add(report); // Add the proposal to the list
+                            }
+                        }
+                    }
+                }
+        }
+            catch (Exception ex)
+            {
+                // Log or handle exception as needed
+                Console.WriteLine("Error fetching proposals: " + ex.Message);
+                return null; // Return null if an error occurs
+            }
+            finally
+            {
+                // Ensure the connection is closed
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+
+            return ReportslList; // Return the list of proposals
+        }
     }
 }
+
+public class Proposals
+{
+    public int submissionId { get; set; }
+    public int UserID { get; set; }
+    public int themeid { get; set; }  // Can be nullable or string type
+    public string themename { get; set; }
+    public string status { get; set; }  // Nullable decimal
+    public string title { get; set; }  // Nullable DateTime
+}
+
+
+public class Reports
+{
+    public int ReportId { get; set; }
+   // public int UserID { get; set; }
+   // public int Submissionid { get; set; }  // Can be nullable or string type
+    //public string role { get; set; }
+
+    public string title { get; set; }
+
+    // public string username { get; set; }
+    //public string status { get; set; }  // Nullable decimal
+    //  // Nullable DateTime
+}
+
+    

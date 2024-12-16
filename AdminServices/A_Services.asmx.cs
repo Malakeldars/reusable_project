@@ -328,7 +328,7 @@ namespace AdminServices
                     }
 
                     // Check if the role is "referee"
-                    if (role.Equals("referee", StringComparison.OrdinalIgnoreCase))
+                    if (role.Equals("admin", StringComparison.OrdinalIgnoreCase))
                     {
                         // Insert the report into the Reports table
                         using (SqlCommand insertReportCmd = new SqlCommand("INSERT INTO Reports (title, reportcontent, uploaddate, userID) VALUES (@title, @content, @uploaddate, @userID)", conn))

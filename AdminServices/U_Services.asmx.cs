@@ -214,7 +214,8 @@ namespace AdminServices
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO Reports (SubmissionID,title,reportcontent,uploaddate) VALUES (@submissionid, @title, @report, @uploaddate) ", connection);
+           
+                SqlCommand cmd = new SqlCommand("INSERT INTO Reports (SubmissionID,title,reportcontent) VALUES (@submissionid, @title, @report) ", connection);
                 cmd.Parameters.AddWithValue("@submissionid", submissionid);
                 cmd.Parameters.AddWithValue("@title", title);
                 cmd.Parameters.AddWithValue("@report", report);
