@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Web.Services;
 using System.Web.UI.WebControls;
@@ -22,7 +23,7 @@ namespace AdminServices
     {
 
 
-         SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable;Integrated Security=True;Encrypt=False");
+         SqlConnection connection = new SqlConnection("Data Source=LAPTOP-77LHTH18\\SQLEXPRESS01;Initial Catalog=Reusable_project;Integrated Security=True;Encrypt=False");
 
         [WebMethod]
         public bool Create_theme(String Name, String Duration, DateTime Deadline, float Budget)
@@ -300,8 +301,6 @@ namespace AdminServices
 
       
 
-        //    }
-        //}
 
         [WebMethod]
         public bool SendFinalReport(string title, string content, DateTime uploadDate, int userID)
@@ -367,6 +366,51 @@ namespace AdminServices
         }
 
 
+        [WebMethod]
+
+        public List<Submissions> Availablesubmissions()
+        {
+            List<Submissions> submissionslist = new List<Submissions>();
+            try
+            {
+                using (connection)
+                {
+                    string query = @"SELECT s.submissionId , s.userid , t.name , s.title,s.status 
+                      FROM Submissions s INNER JOIN Themes t ON s.themeid = t.themeId";
+                    using(SqlCommand cmd = new SqlCommand(query , connection))
+                    {
+                        connection.Open();
+                        using(SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Submissions submission = new Submissions
+                                {
+                                    SubmissionId = Convert.ToInt32(reader["submissionId"]),
+                                    userid = Convert.ToInt32(reader["userid"]),
+                                    themename = reader["name"].ToString(),
+                                    title = reader["title"].ToString(),
+                                    status = reader["status"].ToString()
+                                };
+                                submissionslist.Add(submission);
+                            }
+                        }
+                    }
+                }
+                return submissionslist;
+        }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open) { connection.Close(); }
+            }
+
+           
+        }
+       
     }
 }
 
@@ -380,6 +424,17 @@ public class Theme
     public DateTime? Deadline { get; set; }  // Nullable DateTime
 }
 
+public class Submissions
+{
+    public int SubmissionId { get; set; }
+    public int userid { get; set; }
+
+    public string themename {  get; set; }
+
+    public string status {  get; set; }
+    public string title { get; set; }
+
+}
 
 
 
