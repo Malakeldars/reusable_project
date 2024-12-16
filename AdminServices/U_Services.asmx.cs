@@ -213,9 +213,7 @@ namespace AdminServices
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO Reports (SubmissionID,title,reportcontent,uploaddate) VALUES (@submissionid, @title, @report, @uploaddate) ", connection);
-            //try
-            //{
+           
                 SqlCommand cmd = new SqlCommand("INSERT INTO Reports (SubmissionID,title,reportcontent) VALUES (@submissionid, @title, @report) ", connection);
                 cmd.Parameters.AddWithValue("@submissionid", submissionid);
                 cmd.Parameters.AddWithValue("@title", title);
@@ -225,18 +223,18 @@ namespace AdminServices
                 int result = cmd.ExecuteNonQuery();
                 bool success = result > 0;
                 return success;
-            //}
-            //catch
-            //{
-            //    return false;
-            //}
-            //finally
-            //{
-            //    if (connection.State == System.Data.ConnectionState.Open)
-            //    {
-            //        connection.Close();
-            //    }
-            //}
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
         }
 
 
