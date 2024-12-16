@@ -25,7 +25,7 @@ namespace AdminServices
 
     public class U_Services : System.Web.Services.WebService
     {
-        SqlConnection connection = new SqlConnection("Data Source =.\\sqlexpress; Initial Catalog = Reusable; Integrated Security = True; Encrypt=False");
+        SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False");
 
 
         [WebMethod]
@@ -199,8 +199,8 @@ namespace AdminServices
             }
         }
 
-        [WebMethod]
 
+        [WebMethod]
         public bool SubmitProposal(int userid, int themeid, string title, string proposal)
         {
             try
@@ -300,7 +300,7 @@ namespace AdminServices
 
             try
             {
-                using (SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable;Integrated Security=True;Encrypt=False"))
+                using (SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False"))
                 {
                     connection.Open();
 

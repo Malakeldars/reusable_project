@@ -23,7 +23,7 @@ namespace AdminServices
     {
 
 
-         SqlConnection connection = new SqlConnection("Data Source=LAPTOP-77LHTH18\\SQLEXPRESS01;Initial Catalog=Reusable_project;Integrated Security=True;Encrypt=False");
+         SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False");
 
         [WebMethod]
         public bool Create_theme(String Name, String Duration, DateTime Deadline, float Budget)
@@ -112,7 +112,7 @@ namespace AdminServices
             string query = "INSERT INTO SubmissionReferees (user_id, SubmissionId) VALUES (@refereeId, @submissionId)";
             try
             {
-                using (SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable;Integrated Security=True;Encrypt=False"))
+                using (SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False"))
                 {
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
@@ -137,7 +137,7 @@ namespace AdminServices
             string query = "DELETE FROM SubmissionReferees WHERE user_id = @RefereeId AND SubmissionId = @SubmissionId";
             try
             {
-                using (SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable;Integrated Security=True;Encrypt=False"))
+                using (SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False"))
                 {
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
@@ -305,7 +305,6 @@ namespace AdminServices
         [WebMethod]
         public bool SendFinalReport(string title, string content, DateTime uploadDate, int userID)
         {
-            // Connection string to the database
             string connectionString = "Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -318,20 +317,21 @@ namespace AdminServices
                     {
                         getRoleCmd.Parameters.AddWithValue("@userID", userID);
 
-                        object roleResult = getRoleCmd.ExecuteScalar(); 
-                        if (roleResult != null)
+                        object roleResult = getRoleCmd.ExecuteScalar();
+
+                    if (roleResult != null)
                         {
                             role = roleResult.ToString();
                         }
                         else
                         {
-                            // Return false if the user does not exist or role is null
-                            return false;
+                                
+                                return false;
+                        
                         }
                     }
-
-                    // Check if the role is "referee"
-                    if (role.Equals("admin", StringComparison.OrdinalIgnoreCase))
+                    
+                    if (role.Equals("referee", StringComparison.OrdinalIgnoreCase))
                     {
                         // Insert the report into the Reports table
                         using (SqlCommand insertReportCmd = new SqlCommand("INSERT INTO Reports (title, reportcontent, uploaddate, userID) VALUES (@title, @content, @uploaddate, @userID)", conn))
@@ -347,18 +347,19 @@ namespace AdminServices
                     }
                     else
                     {
-                        return false;
+                        return false;   
                     }
                 }
                 catch
                 {
-                   
+
                     return false;
                 }
                 finally
                 {
-                    if (conn.State == ConnectionState.Open) { 
-                      conn.Close();
+                    if (conn.State == ConnectionState.Open)
+                    {
+                        conn.Close();
                     }
                 }
 
@@ -415,7 +416,12 @@ namespace AdminServices
 }
 
 
-public class Theme
+
+
+
+
+
+    public class Theme
 {
     public int ThemeId { get; set; }
     public string Name { get; set; }

@@ -393,6 +393,8 @@ namespace AdminServices
 
 public class Proposals
 {
+    internal int userId;
+
     public int submissionId { get; set; }
     public int UserID { get; set; }
     public int themeid { get; set; }  // Can be nullable or string type
