@@ -19,7 +19,7 @@ namespace AdminServices
     // [System.Web.Script.Services.ScriptService]
     public class R_Service : System.Web.Services.WebService
     {
-         SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable;Integrated Security=True;Encrypt=False");
+         SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False");
 
 
         //[WebMethod]
@@ -325,6 +325,8 @@ namespace AdminServices
 
 public class Proposals
 {
+    internal int userId;
+
     public int submissionId { get; set; }
     public int UserID { get; set; }
     public int themeid { get; set; }  // Can be nullable or string type
