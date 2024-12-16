@@ -210,14 +210,15 @@ namespace AdminServices
         }
 
         [WebMethod]
-        public bool SubmitReport(int submissionid, string title, string report)
+        public bool SubmitReport(int submissionid, string title, string report, DateTime uploaddate)
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO Reports (SubmissionID,title,reportcontent) VALUES (@submissionid, @title, @report) ", connection);
+                SqlCommand cmd = new SqlCommand("INSERT INTO Reports (SubmissionID,title,reportcontent,uploaddate) VALUES (@submissionid, @title, @report, @uploaddate) ", connection);
                 cmd.Parameters.AddWithValue("@submissionid", submissionid);
                 cmd.Parameters.AddWithValue("@title", title);
                 cmd.Parameters.AddWithValue("@report", report);
+                cmd.Parameters.AddWithValue("@uploaddate", uploaddate);
                 connection.Open();
                 int result = cmd.ExecuteNonQuery();
                 bool success = result > 0;
