@@ -194,7 +194,7 @@ namespace AdminServices
                 int result = cmd.ExecuteNonQuery();
                 bool success = result > 0;
                 return success;
-            }
+        }
             catch
             {
                 return false;
@@ -205,7 +205,7 @@ namespace AdminServices
                 {
                     connection.Close();
                 }
-            }
+}
         }
 
         [WebMethod]
@@ -269,6 +269,56 @@ namespace AdminServices
 
             return dt;
         }
+
+        [WebMethod]
+        public DataTable GetProposals()
+        {
+            DataTable dt = new DataTable("Submissions");
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection("Data Source=LAPTOP-77LHTH18\\SQLEXPRESS01;Initial Catalog=Reusable_project;Integrated Security=True;Encrypt=False"))
+                {
+                    connection.Open();
+
+                  
+                    string query = @"
+                SELECT 
+                    s.submissionId, 
+                    s.title, 
+                    t.name, 
+                    s.status 
+                FROM 
+                    Submissions s
+                INNER JOIN 
+                    Themes t 
+                ON 
+                    s.themeId = t.themeId";
+
+                    using (SqlCommand cmd = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd))
+                        {
+                            dataAdapter.Fill(dt); 
+                        }
+                    }
+                }
+                return dt;
+            }
+            catch
+            {
+                return null; 
+            }
+            finally
+            {
+                if(connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+
+}
+
 
         [WebMethod]
         public DataTable GetSubBeforeDeadline()
