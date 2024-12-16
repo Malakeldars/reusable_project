@@ -25,7 +25,7 @@ namespace AdminServices
 
     public class U_Services : System.Web.Services.WebService
     {
-        SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable;Integrated Security=True;Encrypt=False");
+        SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False");
 
 
         [WebMethod]
@@ -233,30 +233,42 @@ namespace AdminServices
         {
             try
             {
-           
-                SqlCommand cmd = new SqlCommand("INSERT INTO Reports (userID, SubmissionID,title,reportcontent,uploaddate) VALUES (@userID,@submissionid, @title, @report, uploaddate) ", connection);
+                // Create the SQL command
+                SqlCommand cmd = new SqlCommand(
+                    "INSERT INTO Reports (userID, SubmissionID, title, reportcontent, uploaddate) " +
+                    "VALUES (@userID, @submissionid, @title, @report, @uploaddate)",
+                    connection
+                );
+
+                // Add parameters with their values
                 cmd.Parameters.AddWithValue("@userID", userID);
                 cmd.Parameters.AddWithValue("@submissionid", submissionid);
                 cmd.Parameters.AddWithValue("@title", title);
                 cmd.Parameters.AddWithValue("@report", report);
                 cmd.Parameters.AddWithValue("@uploaddate", uploaddate);
+
+                // Open the connection
                 connection.Open();
+
+                // Execute the query
                 int result = cmd.ExecuteNonQuery();
-                bool success = result > 0;
-                return success;
+                return result > 0; // Return true if at least one row was inserted
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine($"Error: {ex.Message}");
                 return false;
             }
             finally
             {
+                // Ensure the connection is closed
                 if (connection.State == System.Data.ConnectionState.Open)
                 {
                     connection.Close();
                 }
             }
         }
+
 
 
         [WebMethod]
