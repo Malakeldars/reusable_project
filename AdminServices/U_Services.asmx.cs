@@ -152,8 +152,8 @@ namespace AdminServices
                 if (connection.State == System.Data.ConnectionState.Open) { connection.Close(); }
             }
         }
-        
-        
+
+
         [WebMethod]
         public bool UpdateProposal(int submissionid, string proposal)
         {
@@ -195,7 +195,7 @@ namespace AdminServices
                 int result = cmd.ExecuteNonQuery();
                 bool success = result > 0;
                 return success;
-        }
+            }
             catch
             {
                 return false;
@@ -206,7 +206,7 @@ namespace AdminServices
                 {
                     connection.Close();
                 }
-}
+            }
         }
 
         [WebMethod]
@@ -245,8 +245,8 @@ namespace AdminServices
 
             try
             {
-               
-                
+
+
                 string query = "SELECT * FROM Submissions WHERE status = @Status and userid = @user_id";
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
@@ -259,7 +259,7 @@ namespace AdminServices
                         adapter.Fill(dt);
                     }
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -270,6 +270,7 @@ namespace AdminServices
 
             return dt;
         }
+
 
         [WebMethod]
         public DataTable GetProposals()
@@ -282,7 +283,7 @@ namespace AdminServices
                 {
                     connection.Open();
 
-                  
+
                     string query = @"
                 SELECT 
                     s.submissionId, 
@@ -300,7 +301,7 @@ namespace AdminServices
                     {
                         using (SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd))
                         {
-                            dataAdapter.Fill(dt); 
+                            dataAdapter.Fill(dt);
                         }
                     }
                 }
@@ -308,45 +309,46 @@ namespace AdminServices
             }
             catch
             {
-                return null; 
+                return null;
             }
             finally
             {
-                if(connection.State == ConnectionState.Open)
+                if (connection.State == ConnectionState.Open)
                 {
                     connection.Close();
                 }
             }
 
-}
-
+        }
 
         [WebMethod]
-        public DataTable GetSubBeforeDeadline()
+        public DataTable GetSubBeforeDeadline(int userId)
         {
             DataTable dt = new DataTable("Submissions");
 
             try
             {
-
+                // Updated query to filter submissions by the provided userid
                 string query = @"
-            SELECT 
-                s.submissionId, 
-                s.userid, 
-                s.proposal, 
-                s.status, 
-                s.title 
-            FROM 
-                submissions s
-            INNER JOIN 
-                themes t 
-            ON 
-                s.themeid = t.themeid
-            WHERE 
-                t.deadline > GETDATE()";
-                // Compare deadline with current system date and time
+        SELECT 
+            s.submissionId, 
+            s.userid, 
+            s.proposal, 
+            s.status, 
+            s.title 
+        FROM 
+            submissions s
+        INNER JOIN 
+            themes t 
+        ON 
+            s.themeid = t.themeid
+        WHERE 
+            t.deadline > GETDATE() AND s.userid = @UserId"; // Added condition for userid
 
                 SqlCommand cmd = new SqlCommand(query, connection);
+
+                // Add the userid parameter to prevent SQL injection
+                cmd.Parameters.AddWithValue("@UserId", userId);
 
                 if (connection.State != ConnectionState.Open)
                 {
@@ -359,20 +361,22 @@ namespace AdminServices
             catch (Exception ex)
             {
                 Console.WriteLine("Error: " + ex.Message);
-
             }
             finally
             {
                 if (connection.State == ConnectionState.Open)
                 {
-                    connection.Close(); 
+                    connection.Close();
                 }
             }
 
             return dt;
         }
 
+
+
     }
+
 }
 
 
