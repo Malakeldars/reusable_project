@@ -200,7 +200,7 @@ namespace AdminServices
         }
 
 
-
+        [WebMethod]
         public bool SubmitProposal(int userid, int themeid, string title, string proposal)
         {
             try
