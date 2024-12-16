@@ -19,7 +19,7 @@ namespace AdminServices
     // [System.Web.Script.Services.ScriptService]
     public class R_Service : System.Web.Services.WebService
     {
-         SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False");
+         SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=Reusable;Integrated Security=True;Encrypt=False");
 
 
         //[WebMethod]
@@ -133,10 +133,55 @@ namespace AdminServices
                     connection.Close();
                 }
             }
-
-            return proposalList; // Return the list of proposals
+            return proposalList;
         }
 
+        [WebMethod]
+        public DataTable GetRefProposals(int refereeId)
+        {
+            try
+            {
+                DataTable dt = new DataTable("SubmissionReferees");
+                SqlCommand cmd = new SqlCommand("SELECT SubmissionId FROM SubmissionReferees WHERE user_id = @refereeId", connection);
+                cmd.Parameters.AddWithValue("@refereeId", refereeId);
+                connection.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dt);
+                return dt;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                    connection.Close();
+            }
+        }
+        [WebMethod]
+        public DataTable GetRefReports(int refereeId)
+        {
+            try
+            {
+                DataTable dt = new DataTable("SubmissionReferees");
+                SqlCommand cmd = new SqlCommand("SELECT SubmissionId FROM SubmissionReferees WHERE user_id = @refereeId", connection);
+                cmd.Parameters.AddWithValue("@refereeId", refereeId);
+                connection.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dt);
+                return dt;
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                    connection.Close();
+            }
+        }
 
         [WebMethod]
         public DataTable GetProposal(int subid)
@@ -185,7 +230,6 @@ namespace AdminServices
                 if (connection.State == ConnectionState.Open)
                     connection.Close();
             }
-
         }
 
         [WebMethod]
@@ -289,7 +333,6 @@ public class Proposals
     public string title { get; set; }  // Nullable DateTime
 }
 
-
 public class Reports
 {
     public int ReportId { get; set; }
@@ -303,5 +346,4 @@ public class Reports
     //public string status { get; set; }  // Nullable decimal
     //  // Nullable DateTime
 }
-
-    
+   
