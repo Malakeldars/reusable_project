@@ -304,7 +304,6 @@ namespace AdminServices
                 {
                     connection.Open();
 
-
                     string query = @"
                 SELECT 
                     s.submissionId, 
