@@ -17,7 +17,7 @@ namespace AdminServices
     // [System.Web.Script.Services.ScriptService]
     public class ValidatorService : System.Web.Services.WebService
     {
-        private readonly string connectionString = "Data Source=.\\sqlexpress;Initial Catalog=Reusable_project1;Integrated Security=True;Encrypt=False";
+        private readonly string connectionString = "Data Source=LAPTOP-77LHTH18\\SQLEXPRESS01;Initial Catalog=Reusable_project;Integrated Security=True;Encrypt=False";
 
         [WebMethod]
         public UserValidationResponse ValidateUser(string email, string password)

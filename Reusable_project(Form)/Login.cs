@@ -16,7 +16,7 @@ namespace Reusable_project_Form_
     {
 
 
-        SqlConnection Connection = new SqlConnection("Data Source=DESKTOP-2OD02U8\\SQLEXPRESS;Initial Catalog=Reuse_db;Persist Security Info=True;User ID=sa;Password=DC@122180");
+        private SqlConnection Connection = new SqlConnection("Data Source=LAPTOP-77LHTH18\\SQLEXPRESS01;Initial Catalog=Reusable_project;Integrated Security=True;Encrypt=False");
 
         public Login()
         {
@@ -81,8 +81,70 @@ namespace Reusable_project_Form_
 
 
 
-        
+        // validate and find the user type
+        private string ValidateUser(string email, string password, out int userId)
+        {
+            userId = -1;
+            string role = null;
 
+            try
+            {
+                Connection.Open();
+
+                // Check for Admin
+                SqlCommand admincmd = new SqlCommand("SELECT adminId FROM Admin WHERE email = @email AND password = @password", Connection);
+                admincmd.Parameters.AddWithValue("@Email", email);
+                admincmd.Parameters.AddWithValue("@Password", password);
+
+                var adminresult = admincmd.ExecuteScalar();
+                if (adminresult != null)
+                {
+                    userId = Convert.ToInt32(adminresult);
+                    role = "Admin";
+                    return role;
+                }
+
+                // Check for User
+                SqlCommand usercmd = new SqlCommand("SELECT userId FROM Users WHERE email = @email AND password = @password", Connection);
+                usercmd.Parameters.AddWithValue("@Email", email);
+                usercmd.Parameters.AddWithValue("@Password", password);
+
+                var userresult = usercmd.ExecuteScalar();
+                if (userresult != null)
+                {
+                    userId = Convert.ToInt32(userresult);
+                    role = "User";
+                    return role;
+                }
+
+                // Check for Referee
+                SqlCommand refcmd = new SqlCommand("SELECT refereesId FROM Referees WHERE Email = @email AND password = @password", Connection);
+                refcmd.Parameters.AddWithValue("@Email", email);
+                refcmd.Parameters.AddWithValue("@Password", password);
+
+
+                var refresult = refcmd.ExecuteScalar();
+                if (refresult != null)
+                {
+                    userId = Convert.ToInt32(refresult);
+                    role = "Referee";
+                    return role;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+
+                if (Connection.State == System.Data.ConnectionState.Open)
+                {
+                    Connection.Close();
+                }
+            }
 
         private void SignUpPagebtn_Click_1(object sender, EventArgs e)
         {

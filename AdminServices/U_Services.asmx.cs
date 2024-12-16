@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 namespace AdminServices
 {
 
-   
+
 
     /// <summary>
     /// Summary description for U_Services
@@ -23,13 +23,14 @@ namespace AdminServices
     // [System.Web.Script.Services.ScriptService]
 
 
-    public class U_Services : System.Web.Services.WebService    
+    public class U_Services : System.Web.Services.WebService
     {
         SqlConnection connection = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=reusable_proJectDB;Integrated Security=True;Encrypt=False");
 
 
         [WebMethod]
-        public bool CreateAccount(string username, string email, string password, string role) {
+        public bool CreateAccount(string username, string email, string password, string role)
+        {
 
             try
             {
@@ -50,7 +51,7 @@ namespace AdminServices
             }
             finally
             {
-                if(connection.State == System.Data.ConnectionState.Open)
+                if (connection.State == System.Data.ConnectionState.Open)
                 {
                     connection.Close();
                 }
@@ -137,19 +138,19 @@ namespace AdminServices
         public bool DeleteProposal(int submissionid)
         {
             try
-            {  
-                SqlCommand cmd = new SqlCommand("DELETE FROM Submissions WHERE submissionId = @submissionid ",connection);
+            {
+                SqlCommand cmd = new SqlCommand("DELETE FROM Submissions WHERE submissionId = @submissionid ", connection);
                 cmd.Parameters.AddWithValue("@submissionid", submissionid);
                 connection.Open();
                 int result = cmd.ExecuteNonQuery();
                 bool success = result > 0;
                 return success;
             }
-            catch {  return false; }
+            catch { return false; }
             finally
             {
                 if (connection.State == System.Data.ConnectionState.Open) { connection.Close(); }
-          }
+            }
         }
         
         
@@ -209,7 +210,7 @@ namespace AdminServices
         }
 
         [WebMethod]
-        public bool SubmitReport(int submissionid,string title,string report)
+        public bool SubmitReport(int submissionid, string title, string report)
         {
             try
             {
@@ -235,6 +236,92 @@ namespace AdminServices
             }
         }
 
+
+        [WebMethod]
+        public DataTable GetAcceptedSubmissions(int user_id)
+        {
+            DataTable dt = new DataTable("Submissions");
+
+            try
+            {
+               
+                
+                string query = "SELECT * FROM Submissions WHERE status = @Status and userid = @user_id";
+                using (SqlCommand cmd = new SqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@Status", "accepted");
+                    cmd.Parameters.AddWithValue("@user_id", user_id);
+                    connection.Open();
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
+                
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine("Error: " + ex.Message);
+
+            }
+
+            return dt;
+        }
+
+        [WebMethod]
+        public DataTable GetSubBeforeDeadline()
+        {
+            DataTable dt = new DataTable("Submissions");
+
+            try
+            {
+
+                string query = @"
+            SELECT 
+                s.submissionId, 
+                s.userid, 
+                s.proposal, 
+                s.status, 
+                s.title 
+            FROM 
+                submissions s
+            INNER JOIN 
+                themes t 
+            ON 
+                s.themeid = t.themeid
+            WHERE 
+                t.deadline > GETDATE()";
+                // Compare deadline with current system date and time
+
+                SqlCommand cmd = new SqlCommand(query, connection);
+
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dt);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close(); 
+                }
+            }
+
+            return dt;
+        }
+
     }
 }
+
 
